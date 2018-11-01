@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated MPL -->
+      <package
+            uri="http://mdsd.edu/mpl/1.0"
+            class="edu.mdsd.mpl.MPLPackage"
+            genModel="model/MPL.genmodel"/>
+   </extension>
+   <extension
+         point="org.eclipse.emf.validation.constraintProviders">
+      <category
+            id="edu.mdsd.mpl.category"
+            mandatory="true"
+            name="MPL">
+      </category>
+      <constraintProvider
+            cache="true"
+            mode="Batch">
+         <package
+               namespaceUri="http://mdsd.edu/mpl/1.0">
+         </package>
+         <constraints
+               categories="edu.mdsd.mpl.validation.category">
+            <constraint
+                  class="edu.mdsd.mpl.validation.UniqueVariableNamesConstraint"
+                  id="edu.mdsd.mpl.validation.UniqueVariableNamesConstraint"
+                  isEnabledByDefault="true"
+                  lang="Java"
+                  mode="Batch"
+                  name="UniqueVariableNamesConstraint"
+                  severity="ERROR"
+                  statusCode="1">
+               <message>
+                  Variable "{0}" has already been declared!
+               </message>
+               <target
+                     class="Variable">
+               </target>
+            </constraint>
+            <constraint
+                  class="edu.mdsd.mpl.validation.InitialValueInVarDecExistsConstraint"
+                  id="edu.mdsd.mpl.validation.InitialValueInVarDecExistsConstraint"
+                  isEnabledByDefault="true"
+                  lang="Java"
+                  mode="Batch"
+                  name="InitialValueInVarDecExistsConstraint"
+                  severity="ERROR"
+                  statusCode="1">
+               <message>
+                  Variable &quot;{0}&quot; has not been declared!
+               </message>
+               <target
+                     class="VariableDeclaration">
+               </target>
+            </constraint>
+         </constraints>
+      </constraintProvider>
+   </extension>
+
+</plugin>
