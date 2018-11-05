@@ -6,13 +6,6 @@
 
 <plugin>
 
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated MPL -->
-      <package
-            uri="http://mdsd.edu/mpl/1.0"
-            class="edu.mdsd.mpl.MPLPackage"
-            genModel="model/MPL.genmodel"/>
-   </extension>
    <extension
          point="org.eclipse.emf.validation.constraintProviders">
       <category
@@ -60,8 +53,32 @@
                      class="VariableDeclaration">
                </target>
             </constraint>
+            <constraint
+                  class="edu.mdsd.mpl.validation.WellDeclaredForLoop"
+                  id="edu.mdsd.mpl.WellDeclaredForLoop"
+                  isEnabledByDefault="true"
+                  lang="Java"
+                  mode="Batch"
+                  name="WellDeclaredForLoop"
+                  severity="ERROR"
+                  statusCode="1">
+               <message>
+                  The first index has to be &quot;{0}&quot; than the second one, when using &quot;{1}&quot;!
+               </message>
+               <target
+                     class="ForLoop">
+               </target>
+            </constraint>
          </constraints>
       </constraintProvider>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated MPL -->
+      <package
+            uri="http://mdsd.edu/mpl/1.0"
+            class="edu.mdsd.mpl.MPLPackage"
+            genModel="model/MPL.genmodel"/>
    </extension>
 
 </plugin>

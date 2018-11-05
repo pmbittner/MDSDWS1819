@@ -11,7 +11,7 @@
     <genClasses ecoreClass="MPL.ecore#//Program">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MPL.ecore#//Program/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//Program/variableDeclarations"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//Program/statements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//Program/block"/>
     </genClasses>
     <genClasses ecoreClass="MPL.ecore#//VariableDeclaration">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//VariableDeclaration/variable"/>
@@ -30,7 +30,6 @@
     </genClasses>
     <genClasses image="false" ecoreClass="MPL.ecore#//Expression"/>
     <genClasses image="false" ecoreClass="MPL.ecore#//AtomicExpression"/>
-    <genClasses ecoreClass="MPL.ecore#//ArithmeticExpression"/>
     <genClasses ecoreClass="MPL.ecore#//LiteralValue">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MPL.ecore#//LiteralValue/rawValue"/>
     </genClasses>
@@ -46,7 +45,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//UnaryExpression/operand"/>
     </genClasses>
     <genClasses ecoreClass="MPL.ecore#//ParenthesisExpression"/>
-    <genClasses ecoreClass="MPL.ecore#//BinaryExpression">
+    <genClasses image="false" ecoreClass="MPL.ecore#//BinaryExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//BinaryExpression/operand1"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//BinaryExpression/operand2"/>
     </genClasses>
@@ -58,11 +57,23 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//IfStatement/else"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//IfStatement/condition"/>
     </genClasses>
-    <genClasses ecoreClass="MPL.ecore#//Comparison"/>
-    <genClasses ecoreClass="MPL.ecore#//LogicalExpression"/>
+    <genClasses ecoreClass="MPL.ecore#//Comparison">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MPL.ecore#//Comparison/operator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//Comparison/operand2"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//Comparison/operand1"/>
+    </genClasses>
     <genClasses ecoreClass="MPL.ecore#//WhileLoop">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//WhileLoop/block"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//WhileLoop/condition"/>
+    </genClasses>
+    <genClasses ecoreClass="MPL.ecore#//ForLoop">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MPL.ecore#//ForLoop/upperBound"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//ForLoop/block"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//ForLoop/index"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MPL.ecore#//ForLoop/increment"/>
+    </genClasses>
+    <genClasses ecoreClass="MPL.ecore#//AssignmentStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//AssignmentStatement/assignment"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
