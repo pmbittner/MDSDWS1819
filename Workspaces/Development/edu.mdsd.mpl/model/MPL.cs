@@ -1,6 +1,6 @@
 SYNTAXDEF mpl
 FOR <http://mdsd.edu/mpl/1.0>
-START Program
+START MPLModel
 
 OPTIONS {
 	reloadGeneratorModel = "true";
@@ -24,13 +24,21 @@ TOKENSTYLES {
 }
 
 RULES {
+	MPLModel ::= operations* program operations*;
+	
 	// syntax definition for class 'Program'
 	Program ::= "Program" #1 name[] (!1 "Variables" !1 variableDeclarations ("," #1 variableDeclarations)* ".")? !1 block !1 "End" ".";
 	
-	// VARIABLES
+	// OPERATIONS
+	Procedure ::= "Procedure" name[] "(" (parameters ("," #1 parameters)*)? ")" block "End" ".";
+	Function  ::= "Function"  name[] "(" (parameters ("," #1 parameters)*)? ")" block "End" ".";
 	
+	// VARIABLES
+
 	VariableDeclaration ::= variable (":=" initialValue)?;
 	Variable ::= name[];
+	
+	Parameter ::= name[];
 	
 	// EXPRESSIONS
 	
@@ -55,6 +63,8 @@ RULES {
 	VariableReference ::= variable[];
 	@Operator(type="primitive", weight="5", superclass="Expression")
 	LiteralValue ::= rawValue[INTEGER_TOKEN];
+	@Operator(type="primitive", weight="5", superclass="Expression")
+	OperationCall ::= operationName[] "(" (parameters ("," #1 parameters)*)? ")";
 	
 	// STATEMENTS
 	
@@ -67,6 +77,10 @@ RULES {
 	AssignmentStatement ::= assignment ".";
 	@Operator(type="primitive", weight="2", superclass="Statement")
 	ExpressionStatement ::= expression ".";
+	@Operator(type="primitive", weight="2", superclass="Statement")
+	TraceStatement ::= "Trace" "(" variableReference ")" ".";
+	@Operator(type="primitive", weight="2", superclass="Statement")
+	ReturnStatement ::= "Return" value? ".";
 	
 	@Operator(type="primitive", weight="2", superclass="Statement")
 	IfStatement ::= "If" "(" condition ")" "Then" then ("Else" else)? "End" ".";

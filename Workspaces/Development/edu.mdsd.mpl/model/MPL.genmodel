@@ -19,6 +19,7 @@
     </genClasses>
     <genClasses ecoreClass="MPL.ecore#//Variable">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MPL.ecore#//Variable/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MPL.ecore#//Variable/value"/>
     </genClasses>
     <genClasses image="false" ecoreClass="MPL.ecore#//Statement"/>
     <genClasses ecoreClass="MPL.ecore#//Assignment">
@@ -74,6 +75,30 @@
     </genClasses>
     <genClasses ecoreClass="MPL.ecore#//AssignmentStatement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//AssignmentStatement/assignment"/>
+    </genClasses>
+    <genClasses ecoreClass="MPL.ecore#//Function">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MPL.ecore#//Function/returnValue"/>
+    </genClasses>
+    <genClasses ecoreClass="MPL.ecore#//Procedure"/>
+    <genClasses image="false" ecoreClass="MPL.ecore#//Operation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MPL.ecore#//Operation/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//Operation/parameters"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//Operation/block"/>
+    </genClasses>
+    <genClasses ecoreClass="MPL.ecore#//Parameter"/>
+    <genClasses ecoreClass="MPL.ecore#//ReturnStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//ReturnStatement/value"/>
+    </genClasses>
+    <genClasses ecoreClass="MPL.ecore#//OperationCall">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//OperationCall/parameters"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MPL.ecore#//OperationCall/operationName"/>
+    </genClasses>
+    <genClasses ecoreClass="MPL.ecore#//MPLModel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//MPLModel/program"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//MPLModel/operations"/>
+    </genClasses>
+    <genClasses ecoreClass="MPL.ecore#//TraceStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//TraceStatement/variableReference"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
