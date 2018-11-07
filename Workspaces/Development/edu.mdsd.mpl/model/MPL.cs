@@ -24,21 +24,19 @@ TOKENSTYLES {
 }
 
 RULES {
-	MPLModel ::= operations* program operations*;
+	MPLModel ::= (operations : Procedure, Function)* program (operations : Procedure, Function)*;
 	
 	// syntax definition for class 'Program'
 	Program ::= "Program" #1 name[] (!1 "Variables" !1 variableDeclarations ("," #1 variableDeclarations)* ".")? !1 block !1 "End" ".";
 	
 	// OPERATIONS
-	Procedure ::= "Procedure" name[] "(" (parameters ("," #1 parameters)*)? ")" block "End" ".";
-	Function  ::= "Function"  name[] "(" (parameters ("," #1 parameters)*)? ")" block "End" ".";
+	Procedure ::= "Procedure" name[] "(" (parameters ("," #1 parameters)*)? ")" (!1 "Variables" !1 variableDeclarations ("," #1 variableDeclarations)* ".")? block "End" ".";
+	Function  ::= "Function"  name[] "(" (parameters ("," #1 parameters)*)? ")" (!1 "Variables" !1 variableDeclarations ("," #1 variableDeclarations)* ".")? block "End" ".";
 	
 	// VARIABLES
 
 	VariableDeclaration ::= variable (":=" initialValue)?;
 	Variable ::= name[];
-	
-	Parameter ::= name[];
 	
 	// EXPRESSIONS
 	

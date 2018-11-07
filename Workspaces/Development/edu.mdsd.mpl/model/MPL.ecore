@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="mpl" nsURI="http://mdsd.edu/mpl/1.0" nsPrefix="mpl">
-  <eClassifiers xsi:type="ecore:EClass" name="Program">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="variableDeclarations" upperBound="-1"
-        eType="#//VariableDeclaration" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="block" lowerBound="1" eType="#//Block"
-        containment="true"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Program" eSuperTypes="#//Operation"/>
   <eClassifiers xsi:type="ecore:EClass" name="VariableDeclaration">
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
         eType="#//Variable" containment="true"/>
@@ -102,13 +96,14 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Procedure" eSuperTypes="#//Operation"/>
   <eClassifiers xsi:type="ecore:EClass" name="Operation" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
-        eType="#//Parameter" containment="true"/>
+        eType="#//VariableDeclaration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variableDeclarations" upperBound="-1"
+        eType="#//VariableDeclaration" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="block" lowerBound="1" eType="#//Block"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//Variable"/>
   <eClassifiers xsi:type="ecore:EClass" name="ReturnStatement" eSuperTypes="#//Statement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Expression"
         containment="true"/>

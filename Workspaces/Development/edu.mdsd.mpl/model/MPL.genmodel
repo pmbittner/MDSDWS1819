@@ -8,11 +8,7 @@
   <foreignModel>MPL.ecore</foreignModel>
   <genPackages prefix="MPL" basePackage="edu.mdsd" disposableProviderFactory="true"
       ecorePackage="MPL.ecore#/">
-    <genClasses ecoreClass="MPL.ecore#//Program">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MPL.ecore#//Program/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//Program/variableDeclarations"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//Program/block"/>
-    </genClasses>
+    <genClasses ecoreClass="MPL.ecore#//Program"/>
     <genClasses ecoreClass="MPL.ecore#//VariableDeclaration">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//VariableDeclaration/variable"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//VariableDeclaration/initialValue"/>
@@ -81,11 +77,11 @@
     </genClasses>
     <genClasses ecoreClass="MPL.ecore#//Procedure"/>
     <genClasses image="false" ecoreClass="MPL.ecore#//Operation">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MPL.ecore#//Operation/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//Operation/parameters"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MPL.ecore#//Operation/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//Operation/variableDeclarations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//Operation/block"/>
     </genClasses>
-    <genClasses ecoreClass="MPL.ecore#//Parameter"/>
     <genClasses ecoreClass="MPL.ecore#//ReturnStatement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//ReturnStatement/value"/>
     </genClasses>

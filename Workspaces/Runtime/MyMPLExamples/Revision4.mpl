@@ -3,8 +3,8 @@ Function Add(a, b)
 End.
 
 Procedure SoFarProceduresAreUseless()
-	Return.
-	Return 1.
+	Variables a := 1, b := 2.
+	Return Add(a, b).
 End.
 
 Function f(n)
