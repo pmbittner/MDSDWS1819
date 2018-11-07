@@ -111,8 +111,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="OperationCall" eSuperTypes="#//AtomicExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//Expression" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operationName" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operation" lowerBound="1"
+        eType="#//Operation"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MPLModel">
     <eStructuralFeatures xsi:type="ecore:EReference" name="program" lowerBound="1"

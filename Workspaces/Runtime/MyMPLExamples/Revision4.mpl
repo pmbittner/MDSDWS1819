@@ -2,31 +2,39 @@ Function Add(a, b)
 	Return a + b.
 End.
 
-Procedure SoFarProceduresAreUseless()
-	Variables a := 1, b := 2.
-	Return Add(a, b).
-End.
+Procedure doStuff() End.
 
 Function f(n)
     If (n <= 1) Then
     	Return 1.
     End.
-    
+
     Return f(n - 1) + f(n - 2).
-    Return.
+	Return 1.
 End.
 
-Program someName
+Function compare(a, b) 
+	If (a < b) Then
+		Return 1.
+	Else
+		If (a > b) Then
+			Return - 1.
+		Else // a = b
+			Return 0.
+		End.
+	End.
+End.
+
+Program SomeName
 	Variables n := 10.
 	
-	f(n).
+	doStuff().
+	
+	SomeName().
+	
+	n + 3.
+	
+	(f(n) + 3) * 7.
 	
 	Trace(n).
-End.
-
-Procedure underground(Filth, coming, out, to, play)
-	Chop().
-	Chop().
-	Cut(em(), up()).
-	Return Lethal(DNA()).
 End.

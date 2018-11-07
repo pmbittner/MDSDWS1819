@@ -11,7 +11,7 @@ TOKENS {
 	DEFINE IDENTIFIER_TOKEN $('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*$;
 	DEFINE INTEGER_TOKEN $('0'..'9')+$;
 	
-	DEFINE COMPARISON_OPERATOR $ '=' | '<>' | '<' | '>' | '<=' | '>=' $;
+	DEFINE COMPARISON_OPERATOR_TOKEN $ '=' | '<>' | '<' | '>' | '<=' | '>=' $;
 	
 	DEFINE SL_COMMENT $'//'(~('\n'|'\r'|'\uffff'))*$;
 	DEFINE ML_COMMENT $'/*'.*'*/'$;
@@ -40,7 +40,7 @@ RULES {
 	
 	// EXPRESSIONS
 	
-	Comparison ::= operand1 #1 operator[COMPARISON_OPERATOR] #1 operand2;
+	Comparison ::= operand1 #1 operator[COMPARISON_OPERATOR_TOKEN] #1 operand2;
 	
 	@Operator(type="binary_left_associative", weight="2", superclass="Expression")
 	AddExpression ::= operand1 #1 "+" #1 operand2;
@@ -62,7 +62,7 @@ RULES {
 	@Operator(type="primitive", weight="5", superclass="Expression")
 	LiteralValue ::= rawValue[INTEGER_TOKEN];
 	@Operator(type="primitive", weight="5", superclass="Expression")
-	OperationCall ::= operationName[] "(" (parameters ("," #1 parameters)*)? ")";
+	OperationCall ::= operation[] "(" (parameters ("," #1 parameters)*)? ")";
 	
 	// STATEMENTS
 	

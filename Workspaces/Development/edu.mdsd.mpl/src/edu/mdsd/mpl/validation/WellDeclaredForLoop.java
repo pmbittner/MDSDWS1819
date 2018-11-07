@@ -7,7 +7,6 @@ import org.eclipse.emf.validation.IValidationContext;
 import edu.mdsd.mpl.Expression;
 import edu.mdsd.mpl.ForLoop;
 import edu.mdsd.mpl.LiteralValue;
-import edu.mdsd.mpl.Variable;
 
 public class WellDeclaredForLoop extends AbstractModelConstraint {
 
