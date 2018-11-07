@@ -1,0 +1,13 @@
+#Example
+lod 4
+sto a_abcef3d728ab91
+lod 0
+sto b_abcef3d728ab91
+prt "a = "
+yld a_abcef3d728ab91
+prt "\n"
+prt "b = "
+yld b_abcef3d728ab91
+prt "\n"
+jmp end_program_abcef3d728ab91
+end_program_abcef3d728ab91:
