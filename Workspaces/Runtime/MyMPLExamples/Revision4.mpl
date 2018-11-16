@@ -10,7 +10,6 @@ Function f(n)
     End.
 
     Return f(n - 1) + f(n - 2).
-	Return 1.
 End.
 
 Function compare(a, b) 
@@ -22,6 +21,22 @@ Function compare(a, b)
 		Else // a = b
 			Return 0.
 		End.
+	End.
+End.
+
+Function retTest2()
+	If (1 < 2) Then
+		While (1 < 2) Do
+			Return 2.
+		End.
+	Else
+		Return 2.
+	End.
+End.
+
+Function retTest()
+	While(1 < 2) Do
+		Return 2.
 	End.
 End.
 
