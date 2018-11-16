@@ -26,5 +26,8 @@
     <genClasses ecoreClass="MIL.ecore#//RegisterReference">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MIL.ecore#//RegisterReference/address"/>
     </genClasses>
+    <genClasses ecoreClass="MIL.ecore#//MultInstruction"/>
+    <genClasses ecoreClass="MIL.ecore#//SubInstruction"/>
+    <genClasses ecoreClass="MIL.ecore#//DivInstruction"/>
   </genPackages>
 </genmodel:GenModel>

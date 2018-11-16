@@ -24,4 +24,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="address" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MultInstruction" eSuperTypes="#//Instruction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SubInstruction" eSuperTypes="#//Instruction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DivInstruction" eSuperTypes="#//Instruction"/>
 </ecore:EPackage>

@@ -1,0 +1,11 @@
+lod 10
+sto a
+lod 5
+lod a
+sub
+lod 5
+add
+lod 6
+mul
+lod 2
+div

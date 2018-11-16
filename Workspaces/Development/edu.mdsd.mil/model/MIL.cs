@@ -27,6 +27,9 @@ RULES {
 	LoadInstruction ::= "lod" value;
 	StoreInstruction ::= "sto" registerReference?;
 	AddInstruction ::= "add";
+	SubInstruction ::= "sub";
+	MultInstruction ::= "mul";
+	DivInstruction ::= "div";
 	
 	ConstantInteger ::= rawValue[INTEGER_TOKEN];
 	RegisterReference ::= address[IDENTIFIER_TOKEN];
