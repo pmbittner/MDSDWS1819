@@ -8,8 +8,6 @@ public class LoadInterpreter extends InstructionInterpreter<LoadInstruction> {
 
 	@Override
 	protected void interpret(MILInterpreter interpreter, LoadInstruction instruction) {
-		System.out.println("LoadInstruction");
-		
 		int rawValue = interpreter.getRawValue(instruction.getValue());
 		interpreter.getOperandStack().push(rawValue);
 	}

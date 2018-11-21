@@ -20,4 +20,8 @@ public class OperandStack {
 	public int pop() {
 		return stack.pop();
 	}
+
+	public int size() {
+		return stack.size();
+	}
 }

@@ -2,19 +2,19 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="mil" nsURI="http://mdsd.edu/mil/1.0" nsPrefix="mil">
   <eClassifiers xsi:type="ecore:EClass" name="MILModel">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="instructions" upperBound="-1"
-        eType="#//Instruction" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statements" upperBound="-1"
+        eType="#//Statement" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Instruction" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Instruction" abstract="true" eSuperTypes="#//Statement"/>
   <eClassifiers xsi:type="ecore:EClass" name="LoadInstruction" eSuperTypes="#//Instruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//Value"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="StoreInstruction" eSuperTypes="#//Instruction">
+  <eClassifiers xsi:type="ecore:EClass" name="StoreInstruction" eSuperTypes="#//UnaryOperation">
     <eStructuralFeatures xsi:type="ecore:EReference" name="registerReference" eType="#//RegisterReference"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AddInstruction" eSuperTypes="#//Instruction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AddInstruction" eSuperTypes="#//BinaryOperation"/>
   <eClassifiers xsi:type="ecore:EClass" name="Value" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="ConstantInteger" eSuperTypes="#//Value">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="rawValue" lowerBound="1"
@@ -24,7 +24,34 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="address" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MultInstruction" eSuperTypes="#//Instruction"/>
-  <eClassifiers xsi:type="ecore:EClass" name="SubInstruction" eSuperTypes="#//Instruction"/>
-  <eClassifiers xsi:type="ecore:EClass" name="DivInstruction" eSuperTypes="#//Instruction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MultInstruction" eSuperTypes="#//BinaryOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SubInstruction" eSuperTypes="#//BinaryOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DivInstruction" eSuperTypes="#//BinaryOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BinaryOperation" abstract="true" eSuperTypes="#//Instruction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UnaryOperation" abstract="true" eSuperTypes="#//Instruction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NegateInstruction" eSuperTypes="#//UnaryOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JumpInstruction" eSuperTypes="#//Instruction">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="jumpTarget" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConditionalJumpInstruction" eSuperTypes="#//UnaryOperation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="jumpTarget" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Comparison" abstract="true" eSuperTypes="#//BinaryOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EqualsComparison" eSuperTypes="#//Comparison"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NotEqualsComparison" eSuperTypes="#//Comparison"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LowerThanComparison" eSuperTypes="#//Comparison"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LowerEqualsComparison" eSuperTypes="#//Comparison"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GreaterThanComparison" eSuperTypes="#//Comparison"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GreaterEqualsComparison" eSuperTypes="#//Comparison"/>
+  <eClassifiers xsi:type="ecore:EClass" name="YieldInstruction" eSuperTypes="#//UnaryOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PrintInstruction" eSuperTypes="#//Instruction">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JumpMarker" eSuperTypes="#//Statement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Statement" abstract="true"/>
 </ecore:EPackage>

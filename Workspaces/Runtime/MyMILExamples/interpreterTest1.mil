@@ -1,6 +1,14 @@
-lod 10
+lod 1
 sto a
-lod 5
-lod a
-add
-sto f
+
+jmp SetATo2
+
+lod 0
+sto a
+jmp EndProgram
+
+SetATo2:
+lod 2
+sto a
+
+EndProgram :

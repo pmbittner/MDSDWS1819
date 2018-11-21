@@ -9,7 +9,7 @@
   <genPackages prefix="MIL" basePackage="edu.mdsd" disposableProviderFactory="true"
       ecorePackage="MIL.ecore#/">
     <genClasses ecoreClass="MIL.ecore#//MILModel">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MIL.ecore#//MILModel/instructions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MIL.ecore#//MILModel/statements"/>
     </genClasses>
     <genClasses image="false" ecoreClass="MIL.ecore#//Instruction"/>
     <genClasses ecoreClass="MIL.ecore#//LoadInstruction">
@@ -29,5 +29,29 @@
     <genClasses ecoreClass="MIL.ecore#//MultInstruction"/>
     <genClasses ecoreClass="MIL.ecore#//SubInstruction"/>
     <genClasses ecoreClass="MIL.ecore#//DivInstruction"/>
+    <genClasses image="false" ecoreClass="MIL.ecore#//BinaryOperation"/>
+    <genClasses image="false" ecoreClass="MIL.ecore#//UnaryOperation"/>
+    <genClasses ecoreClass="MIL.ecore#//NegateInstruction"/>
+    <genClasses ecoreClass="MIL.ecore#//JumpInstruction">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MIL.ecore#//JumpInstruction/jumpTarget"/>
+    </genClasses>
+    <genClasses ecoreClass="MIL.ecore#//ConditionalJumpInstruction">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MIL.ecore#//ConditionalJumpInstruction/jumpTarget"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="MIL.ecore#//Comparison"/>
+    <genClasses ecoreClass="MIL.ecore#//EqualsComparison"/>
+    <genClasses ecoreClass="MIL.ecore#//NotEqualsComparison"/>
+    <genClasses ecoreClass="MIL.ecore#//LowerThanComparison"/>
+    <genClasses ecoreClass="MIL.ecore#//LowerEqualsComparison"/>
+    <genClasses ecoreClass="MIL.ecore#//GreaterThanComparison"/>
+    <genClasses ecoreClass="MIL.ecore#//GreaterEqualsComparison"/>
+    <genClasses ecoreClass="MIL.ecore#//YieldInstruction"/>
+    <genClasses ecoreClass="MIL.ecore#//PrintInstruction">
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute MIL.ecore#//PrintInstruction/text"/>
+    </genClasses>
+    <genClasses ecoreClass="MIL.ecore#//JumpMarker">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MIL.ecore#//JumpMarker/name"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="MIL.ecore#//Statement"/>
   </genPackages>
 </genmodel:GenModel>

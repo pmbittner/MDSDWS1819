@@ -10,6 +10,7 @@ OPTIONS {
 TOKENS {
 	DEFINE IDENTIFIER_TOKEN $('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*$;
 	DEFINE INTEGER_TOKEN $('-')?('0'..'9')+$;
+	DEFINE STRING_TOKEN $ '"' ('a'..'z'|'A'..'Z'|'_'|'0'..'9'|$ + WHITESPACE + $|'\n'|'\r')* '"'$;
 	
 	DEFINE SL_COMMENT $'//'(~('\n'|'\r'|'\uffff'))*$;
 	DEFINE ML_COMMENT $'/*'.*'*/'$;
@@ -22,16 +23,31 @@ TOKENSTYLES {
 }
 
 RULES {
-	// syntax definition for class 'MILModel'
-	MILModel ::= instructions*;
+	MILModel ::= statements*;
 	
+	JumpMarker ::= name[IDENTIFIER_TOKEN] ":";
+	
+	JumpInstruction ::= "jmp" jumpTarget[IDENTIFIER_TOKEN];
+	ConditionalJumpInstruction ::= "jpc" jumpTarget[IDENTIFIER_TOKEN];
+
 	LoadInstruction ::= "lod" value;
 	StoreInstruction ::= "sto" registerReference?;
+
+	PrintInstruction ::= "prt" text[STRING_TOKEN];
+	YieldInstruction ::= "yld";
 	AddInstruction ::= "add";
 	SubInstruction ::= "sub";
 	MultInstruction ::= "mul";
 	DivInstruction ::= "div";
+	NegateInstruction ::= "neg";
 	
+	EqualsComparison ::= "eq";
+	NotEqualsComparison ::= "neq";
+	LowerThanComparison ::= "lt";
+	LowerEqualsComparison ::= "leq";
+	GreaterThanComparison ::= "gt";
+	GreaterEqualsComparison ::= "geq";
+
 	ConstantInteger ::= rawValue[INTEGER_TOKEN];
 	RegisterReference ::= address[IDENTIFIER_TOKEN];
 }
