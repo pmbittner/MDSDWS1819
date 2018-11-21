@@ -12,10 +12,10 @@ public class StoreInterpreter extends InstructionInterpreter<StoreInstruction> {
 		System.out.println("StoreInstruction");
 		
 		RegisterReference registerReference = instruction.getRegisterReference();
-		int rawValue = interpreter.popFromOperandStack();
+		int rawValue = interpreter.getOperandStack().pop();
 		
 		if (registerReference != null) {
-			interpreter.setVariableRegisterValue(registerReference.getAddress(), rawValue);
+			interpreter.getVariableRegister().put(registerReference.getAddress(), rawValue);
 		}
 	}
 

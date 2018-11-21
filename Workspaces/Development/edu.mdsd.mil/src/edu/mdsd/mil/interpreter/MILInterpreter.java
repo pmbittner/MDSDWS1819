@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Stack;
-
 import edu.mdsd.mil.AddInstruction;
 import edu.mdsd.mil.ConstantInteger;
 import edu.mdsd.mil.Instruction;
@@ -21,16 +19,16 @@ import edu.mdsd.mil.interpreter.instruction.StoreInterpreter;
 public class MILInterpreter {
 	private int programCounter = 0;
 	
-	Stack<Integer> operandStack;
-	Map<String, Integer> variableRegister;
+	OperandStack operandStack;
+	VariableRegister variableRegister;
 	
 	@SuppressWarnings("rawtypes")
 	private Map<Class, InstructionInterpreter> instructionInterpreters;
 	
 	@SuppressWarnings("rawtypes")
 	public MILInterpreter() {
-		operandStack = new Stack<>();
-		variableRegister = new HashMap<>();
+		operandStack = new OperandStack();
+		variableRegister = new VariableRegister();
 		
 		instructionInterpreters = new HashMap<Class, InstructionInterpreter>();
 		instructionInterpreters.put(AddInstruction.class, new AddInterpreter());
@@ -39,8 +37,8 @@ public class MILInterpreter {
 	}
 	
 	public void initialize() {
-		operandStack.clear();
-		variableRegister.clear();
+		operandStack.initialize();
+		variableRegister.initialize();
 		programCounter = 0;
 	}
 	
@@ -53,7 +51,7 @@ public class MILInterpreter {
 			++programCounter;
 		}
 		
-		return variableRegister;
+		return variableRegister.getRegister();
 	}
 	
 	private void interpret(Instruction instruction) {
@@ -77,31 +75,17 @@ public class MILInterpreter {
 		}
 		
 		if (value instanceof RegisterReference) {
-			return getVariableRegisterValue(((RegisterReference) value).getAddress());
+			return variableRegister.get(((RegisterReference) value).getAddress());
 		}
 		
 		throw new UnsupportedOperationException();
 	}
 	
-	public int getVariableRegisterValue(String address) {
-		// lazy initialization
-		if (!variableRegister.containsKey(address)) {
-			variableRegister.put(address, 0);
-			return 0;
-		}
-		
-		return variableRegister.get(address);
-	}
-
-	public void setVariableRegisterValue(String address, int rawValue) {
-		variableRegister.put(address, rawValue);
+	public VariableRegister getVariableRegister() {
+		return variableRegister;
 	}
 	
-	public void pushOnOperandStack(int rawValue) {
-		operandStack.push(rawValue);
-	}
-
-	public int popFromOperandStack() {
-		return operandStack.pop();
+	public OperandStack getOperandStack() {
+		return operandStack;
 	}
 }

@@ -11,7 +11,7 @@ public class LoadInterpreter extends InstructionInterpreter<LoadInstruction> {
 		System.out.println("LoadInstruction");
 		
 		int rawValue = interpreter.getRawValue(instruction.getValue());
-		interpreter.pushOnOperandStack(rawValue);
+		interpreter.getOperandStack().push(rawValue);
 	}
 
 }
