@@ -31,12 +31,12 @@
   <eClassifiers xsi:type="ecore:EClass" name="UnaryOperation" abstract="true" eSuperTypes="#//Instruction"/>
   <eClassifiers xsi:type="ecore:EClass" name="NegateInstruction" eSuperTypes="#//UnaryOperation"/>
   <eClassifiers xsi:type="ecore:EClass" name="JumpInstruction" eSuperTypes="#//Instruction">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="jumpTarget" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="jumpTarget" lowerBound="1"
+        eType="#//JumpMarker"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConditionalJumpInstruction" eSuperTypes="#//UnaryOperation">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="jumpTarget" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="jumpTarget" lowerBound="1"
+        eType="#//JumpMarker"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Comparison" abstract="true" eSuperTypes="#//BinaryOperation"/>
   <eClassifiers xsi:type="ecore:EClass" name="EqualsComparison" eSuperTypes="#//Comparison"/>
@@ -48,7 +48,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="YieldInstruction" eSuperTypes="#//UnaryOperation"/>
   <eClassifiers xsi:type="ecore:EClass" name="PrintInstruction" eSuperTypes="#//Instruction">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        changeable="false"/>
+        unsettable="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JumpMarker" eSuperTypes="#//Statement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

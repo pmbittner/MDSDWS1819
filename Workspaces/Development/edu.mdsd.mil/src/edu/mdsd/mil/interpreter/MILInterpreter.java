@@ -6,20 +6,28 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import edu.mdsd.mil.AddInstruction;
+import edu.mdsd.mil.ConditionalJumpInstruction;
 import edu.mdsd.mil.ConstantInteger;
 import edu.mdsd.mil.Instruction;
 import edu.mdsd.mil.JumpInstruction;
 import edu.mdsd.mil.JumpMarker;
 import edu.mdsd.mil.LoadInstruction;
 import edu.mdsd.mil.MILModel;
+import edu.mdsd.mil.NegateInstruction;
+import edu.mdsd.mil.PrintInstruction;
 import edu.mdsd.mil.RegisterReference;
 import edu.mdsd.mil.Statement;
 import edu.mdsd.mil.StoreInstruction;
 import edu.mdsd.mil.Value;
+import edu.mdsd.mil.YieldInstruction;
 import edu.mdsd.mil.interpreter.instruction.JumpInterpreter;
 import edu.mdsd.mil.interpreter.instruction.LoadInterpreter;
-import edu.mdsd.mil.interpreter.instruction.operation.AddInterpreter;
-import edu.mdsd.mil.interpreter.instruction.operation.StoreInterpreter;
+import edu.mdsd.mil.interpreter.instruction.PrintInterpreter;
+import edu.mdsd.mil.interpreter.instruction.operation.binary.AddInterpreter;
+import edu.mdsd.mil.interpreter.instruction.operation.unary.ConditionalJumpInterpreter;
+import edu.mdsd.mil.interpreter.instruction.operation.unary.NegateInterpreter;
+import edu.mdsd.mil.interpreter.instruction.operation.unary.StoreInterpreter;
+import edu.mdsd.mil.interpreter.instruction.operation.unary.YieldInterpreter;
 
 public class MILInterpreter {
 	@SuppressWarnings("rawtypes")
@@ -29,24 +37,31 @@ public class MILInterpreter {
 	private int programCounter = 0;
 	
 	List<Instruction> instructions;
-	Map<String, Integer> jumpMarkers;
+	Map<JumpMarker, Integer> jumpMarkers;
 	
 	OperandStack operandStack;
 	VariableRegister variableRegister;
 	
 	
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "serial" })
 	public MILInterpreter() {
 		operandStack = new OperandStack();
 		variableRegister = new VariableRegister();
 		instructions = null;
 		jumpMarkers = null;
 		
-		instructionInterpreters = new HashMap<Class, InstructionInterpreter>();
-		instructionInterpreters.put(AddInstruction.class, new AddInterpreter());
-		instructionInterpreters.put(StoreInstruction.class, new StoreInterpreter());
-		instructionInterpreters.put(LoadInstruction.class, new LoadInterpreter());
-		instructionInterpreters.put(JumpInstruction.class, new JumpInterpreter());
+		instructionInterpreters = new HashMap<Class, InstructionInterpreter>() {
+			{
+				put(AddInstruction.class, new AddInterpreter());
+				put(StoreInstruction.class, new StoreInterpreter());
+				put(LoadInstruction.class, new LoadInterpreter());
+				put(JumpInstruction.class, new JumpInterpreter());
+				put(PrintInstruction.class, new PrintInterpreter());
+				put(ConditionalJumpInstruction.class, new ConditionalJumpInterpreter());
+				put(NegateInstruction.class, new NegateInterpreter());
+				put(YieldInstruction.class, new YieldInterpreter());
+			}
+		};
 	}
 	
 	public void initialize() {
@@ -60,8 +75,9 @@ public class MILInterpreter {
 	
 		while (programCounter < instructions.size()) {
 			Instruction currentInstruction = instructions.get(programCounter);
-			interpret(currentInstruction);
 			++programCounter;
+			
+			interpret(currentInstruction);
 		}
 		
 		return variableRegister.getRegister();
@@ -78,7 +94,7 @@ public class MILInterpreter {
 				instructions.add((Instruction)statement);
 				++instructionPosition;
 			} else if (statement instanceof JumpMarker) {
-				jumpMarkers.put(((JumpMarker) statement).getName(), instructionPosition);
+				jumpMarkers.put((JumpMarker) statement, instructionPosition);
 			} else {
 				throw new UnsupportedOperationException();
 			}
@@ -99,7 +115,7 @@ public class MILInterpreter {
 	}
 	
 	// public
-	public void jumpTo(String label) {
+	public void jumpTo(JumpMarker label) {
 		if (!jumpMarkers.containsKey(label))
 			throw new IllegalArgumentException("The jump label " + label + " could not be found!");
 		

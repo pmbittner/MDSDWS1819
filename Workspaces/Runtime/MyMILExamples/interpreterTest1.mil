@@ -1,14 +1,30 @@
+prt "\n_________________\n"
+
 lod 1
-sto a
-
-jmp SetATo2
-
-lod 0
-sto a
-jmp EndProgram
-
-SetATo2:
 lod 2
 sto a
 
-EndProgram :
+lod a
+add
+prt "a is "
+yld
+
+lod 4
+neg
+prt "neg 4 is "
+yld
+
+lod 1
+jpc VarIs1
+jmp VarIsN1
+
+VarIs1:
+prt "VarIs1\n"
+jmp EndProgram
+
+VarIsN1:
+prt "not VarIs1\n"
+jmp EndProgram
+
+EndProgram:
+prt "Done"

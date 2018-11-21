@@ -33,10 +33,10 @@
     <genClasses image="false" ecoreClass="MIL.ecore#//UnaryOperation"/>
     <genClasses ecoreClass="MIL.ecore#//NegateInstruction"/>
     <genClasses ecoreClass="MIL.ecore#//JumpInstruction">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MIL.ecore#//JumpInstruction/jumpTarget"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MIL.ecore#//JumpInstruction/jumpTarget"/>
     </genClasses>
     <genClasses ecoreClass="MIL.ecore#//ConditionalJumpInstruction">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MIL.ecore#//ConditionalJumpInstruction/jumpTarget"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MIL.ecore#//ConditionalJumpInstruction/jumpTarget"/>
     </genClasses>
     <genClasses image="false" ecoreClass="MIL.ecore#//Comparison"/>
     <genClasses ecoreClass="MIL.ecore#//EqualsComparison"/>

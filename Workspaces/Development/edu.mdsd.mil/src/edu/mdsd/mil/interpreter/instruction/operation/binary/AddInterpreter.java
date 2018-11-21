@@ -1,7 +1,8 @@
-package edu.mdsd.mil.interpreter.instruction.operation;
+package edu.mdsd.mil.interpreter.instruction.operation.binary;
 
 import edu.mdsd.mil.AddInstruction;
 import edu.mdsd.mil.interpreter.MILInterpreter;
+import edu.mdsd.mil.interpreter.instruction.operation.BinaryOperationInterpreter;
 
 public class AddInterpreter extends BinaryOperationInterpreter<AddInstruction> {
 

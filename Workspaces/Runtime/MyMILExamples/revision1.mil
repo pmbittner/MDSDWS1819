@@ -1,7 +1,5 @@
 //Example 1
-lod 10
-sto a
 lod 5
-lod a
+lod 10
 add
-sto f
+sto x

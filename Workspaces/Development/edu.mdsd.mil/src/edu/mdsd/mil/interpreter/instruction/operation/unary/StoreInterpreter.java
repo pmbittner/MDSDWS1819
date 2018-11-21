@@ -1,8 +1,9 @@
-package edu.mdsd.mil.interpreter.instruction.operation;
+package edu.mdsd.mil.interpreter.instruction.operation.unary;
 
 import edu.mdsd.mil.RegisterReference;
 import edu.mdsd.mil.StoreInstruction;
 import edu.mdsd.mil.interpreter.MILInterpreter;
+import edu.mdsd.mil.interpreter.instruction.operation.UnaryOperationInterpreter;
 
 public class StoreInterpreter extends UnaryOperationInterpreter<StoreInstruction> {
 

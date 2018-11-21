@@ -24,22 +24,6 @@ Function compare(a, b)
 	End.
 End.
 
-Function retTest2()
-	If (1 < 2) Then
-		While (1 < 2) Do
-			Return 2.
-		End.
-	Else
-		Return 2.
-	End.
-End.
-
-Function retTest()
-	While(1 < 2) Do
-		Return 2.
-	End.
-End.
-
 Program SomeName
 	Variables n := 10.
 	

@@ -10,7 +10,7 @@ public abstract class UnaryOperationInterpreter<T extends UnaryOperation> extend
 	protected final void interpret(MILInterpreter interpreter, T instruction) {
 		int operandStackSize = interpreter.getOperandStack().size();
 		if (operandStackSize < 1) {
-			throw new IllegalArgumentException("Too few arguments (" + operandStackSize + ") on operand stack for BinaryOperation. Expected 1");
+			throw new IllegalArgumentException("Too few arguments (" + operandStackSize + ") on operand stack for UnaryOperation. Expected 1");
 		} else {
 			OperandStack ops = interpreter.getOperandStack();
 			int operand = ops.pop();
