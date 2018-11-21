@@ -5,12 +5,10 @@ import org.eclipse.emf.validation.AbstractModelConstraint;
 import org.eclipse.emf.validation.IValidationContext;
 
 import edu.mdsd.mpl.Block;
-import edu.mdsd.mpl.ForLoop;
 import edu.mdsd.mpl.Function;
 import edu.mdsd.mpl.IfStatement;
 import edu.mdsd.mpl.ReturnStatement;
 import edu.mdsd.mpl.Statement;
-import edu.mdsd.mpl.WhileLoop;
 import edu.mdsd.mpl.util.StatementUtils;
 
 public class FunctionReturnsOnEveryBranch extends AbstractModelConstraint {
@@ -22,12 +20,6 @@ public class FunctionReturnsOnEveryBranch extends AbstractModelConstraint {
 		for (Statement statement : block.getStatements()) {
 			if (statement instanceof ReturnStatement)
 				return true;
-			if (statement instanceof WhileLoop)
-				if (providesReturnStatement(((WhileLoop) statement).getBlock()))
-					return true;
-			if (statement instanceof ForLoop)
-				if (providesReturnStatement(((ForLoop) statement).getBlock()))
-					return true;
 		}
 		
 		// If there are no branches, the return statement is missing.
