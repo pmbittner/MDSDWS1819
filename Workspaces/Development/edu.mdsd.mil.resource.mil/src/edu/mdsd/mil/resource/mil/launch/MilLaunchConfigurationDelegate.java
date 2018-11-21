@@ -40,6 +40,7 @@ public class MilLaunchConfigurationDelegate extends LaunchConfigurationDelegate 
 		
 		//new edu.mdsd.mil.resource.mil.launch.MilLaunchConfigurationHelper().launch(configuration, mode, launch, monitor);
 		
+		interpreter.initialize();
 		Map<String, Integer> output = interpreter.interpret(milmodel);
 		
 		System.out.println("\nResults:");
