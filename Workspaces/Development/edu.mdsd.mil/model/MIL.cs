@@ -4,6 +4,7 @@ START MILModel
 
 OPTIONS {
 	reloadGeneratorModel = "true";
+	overrideLaunchConfigurationDelegate = "false";
 }
 
 TOKENS {

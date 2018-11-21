@@ -1,0 +1,6 @@
+lod 10
+sto a
+lod 5
+lod a
+add
+sto f
