@@ -26,20 +26,22 @@ RULES {
 	MILModel ::= statements*;
 	
 	JumpMarker ::= name[IDENTIFIER_TOKEN] ":";
-	
-	JumpInstruction ::= "jmp" jumpTarget[IDENTIFIER_TOKEN];
-	ConditionalJumpInstruction ::= "jpc" jumpTarget[IDENTIFIER_TOKEN];
 
 	LoadInstruction ::= "lod" value;
-	StoreInstruction ::= "sto" registerReference?;
-
+	ReturnInstruction ::= "ret";
 	PrintInstruction ::= "prt" text[STRING_TOKEN];
+	JumpInstruction ::= "jmp" jumpTarget[IDENTIFIER_TOKEN];
+	CallInstruction ::= "cal" jumpTarget[IDENTIFIER_TOKEN];
+	
+	ConditionalJumpInstruction ::= "jpc" jumpTarget[IDENTIFIER_TOKEN];
+	NegateInstruction ::= "neg";
+	StoreInstruction ::= "sto" registerReference?;
 	YieldInstruction ::= "yld";
+	
 	AddInstruction ::= "add";
 	SubInstruction ::= "sub";
 	MultInstruction ::= "mul";
 	DivInstruction ::= "div";
-	NegateInstruction ::= "neg";
 	
 	EqualsComparison ::= "eq";
 	NotEqualsComparison ::= "neq";

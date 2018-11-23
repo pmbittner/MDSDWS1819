@@ -52,5 +52,7 @@
     <genClasses image="false" ecoreClass="MIL.ecore#//Jumper">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MIL.ecore#//Jumper/jumpTarget"/>
     </genClasses>
+    <genClasses ecoreClass="MIL.ecore#//CallInstruction"/>
+    <genClasses ecoreClass="MIL.ecore#//ReturnInstruction"/>
   </genPackages>
 </genmodel:GenModel>

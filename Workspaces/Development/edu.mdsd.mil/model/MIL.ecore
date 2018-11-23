@@ -52,4 +52,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="jumpTarget" lowerBound="1"
         eType="#//JumpMarker"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CallInstruction" eSuperTypes="#//Jumper #//Instruction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ReturnInstruction" eSuperTypes="#//Instruction"/>
 </ecore:EPackage>
