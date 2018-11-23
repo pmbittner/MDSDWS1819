@@ -5,29 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import edu.mdsd.mil.AddInstruction;
-import edu.mdsd.mil.ConditionalJumpInstruction;
-import edu.mdsd.mil.ConstantInteger;
-import edu.mdsd.mil.Instruction;
-import edu.mdsd.mil.JumpInstruction;
-import edu.mdsd.mil.JumpMarker;
-import edu.mdsd.mil.LoadInstruction;
-import edu.mdsd.mil.MILModel;
-import edu.mdsd.mil.NegateInstruction;
-import edu.mdsd.mil.PrintInstruction;
-import edu.mdsd.mil.RegisterReference;
-import edu.mdsd.mil.Statement;
-import edu.mdsd.mil.StoreInstruction;
-import edu.mdsd.mil.Value;
-import edu.mdsd.mil.YieldInstruction;
-import edu.mdsd.mil.interpreter.instruction.JumpInterpreter;
-import edu.mdsd.mil.interpreter.instruction.LoadInterpreter;
-import edu.mdsd.mil.interpreter.instruction.PrintInterpreter;
-import edu.mdsd.mil.interpreter.instruction.operation.binary.AddInterpreter;
-import edu.mdsd.mil.interpreter.instruction.operation.unary.ConditionalJumpInterpreter;
-import edu.mdsd.mil.interpreter.instruction.operation.unary.NegateInterpreter;
-import edu.mdsd.mil.interpreter.instruction.operation.unary.StoreInterpreter;
-import edu.mdsd.mil.interpreter.instruction.operation.unary.YieldInterpreter;
+import edu.mdsd.mil.*;
+import edu.mdsd.mil.interpreter.instruction.*;
+import edu.mdsd.mil.interpreter.instruction.operation.binary.*;
+import edu.mdsd.mil.interpreter.instruction.operation.binary.comparison.*;
+import edu.mdsd.mil.interpreter.instruction.operation.unary.*;
 
 public class MILInterpreter {
 	@SuppressWarnings("rawtypes")
@@ -52,14 +34,26 @@ public class MILInterpreter {
 		
 		instructionInterpreters = new HashMap<Class, InstructionInterpreter>() {
 			{
-				put(AddInstruction.class, new AddInterpreter());
-				put(StoreInstruction.class, new StoreInterpreter());
 				put(LoadInstruction.class, new LoadInterpreter());
-				put(JumpInstruction.class, new JumpInterpreter());
 				put(PrintInstruction.class, new PrintInterpreter());
+				put(JumpInstruction.class, new JumpInterpreter());
+
 				put(ConditionalJumpInstruction.class, new ConditionalJumpInterpreter());
 				put(NegateInstruction.class, new NegateInterpreter());
+				put(StoreInstruction.class, new StoreInterpreter());
 				put(YieldInstruction.class, new YieldInterpreter());
+				
+				put(AddInstruction.class, new AddInterpreter());
+				put(SubInstruction.class, new SubInterpreter());
+				put(MultInstruction.class, new MultInterpreter());
+				put(DivInstruction.class, new DivInterpreter());
+
+				put(EqualsComparison.class, new EqualsInterpreter());
+				put(GreaterEqualsComparison.class, new GreaterEqualsInterpreter());
+				put(GreaterThanComparison.class, new GreaterThanInterpreter());
+				put(LowerEqualsComparison.class, new LowerEqualsInterpreter());
+				put(LowerThanComparison.class, new LowerThanInterpreter());
+				put(NotEqualsComparison.class, new NotEqualsInterpreter());
 			}
 		};
 	}
