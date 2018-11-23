@@ -1,4 +1,41 @@
-lod 1
-lod 2
-lt
-sto result
+lod 22
+lod 7
+cal ComplicatedAdd
+sto res
+jmp EndProgram
+
+// Function ComplicatedAdd(a, b)
+// returns a + b, just by adding 1 incrementally
+ComplicatedAdd:
+	sto a
+	
+	// While a != 0 {
+	ComplicatedAdd_Loop:
+	lod a
+	lod 0
+	eq
+	jpc ComplicatedAdd_EndLoop
+		sto b
+		lod b
+		cal PlusOne
+		
+		// a--
+		lod a
+		lod 1
+		sub
+		sto a
+		jmp ComplicatedAdd_Loop
+	
+	// }
+	ComplicatedAdd_EndLoop:
+	
+	ret
+
+PlusOne:
+	sto argument
+	lod argument
+	lod 1
+	add
+	ret
+
+EndProgram:

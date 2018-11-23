@@ -8,7 +8,7 @@ public class YieldInterpreter extends UnaryOperationInterpreter<YieldInstruction
 
 	@Override
 	protected void interpretOperation(MILInterpreter interpreter, YieldInstruction instruction, int operand) {
-		System.out.println(operand);
+		interpreter.out().println(operand);
 	}
 
 }

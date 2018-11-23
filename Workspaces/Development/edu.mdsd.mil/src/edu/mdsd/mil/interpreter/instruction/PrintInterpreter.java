@@ -12,6 +12,6 @@ public class PrintInterpreter extends InstructionInterpreter<PrintInstruction> {
 		// Twice for Java
 		// Twice for replaceAll expecting a regex
 		msg = msg.replaceAll("\\\\n", "\n");
-		System.out.print(msg);
+		interpreter.out().print(msg);
 	}
 }

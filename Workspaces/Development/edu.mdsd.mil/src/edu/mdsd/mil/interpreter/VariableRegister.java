@@ -29,7 +29,7 @@ public class VariableRegister {
 		register.put(address, rawValue);
 	}
 	
-	public Map<String, Integer> getRegister() {
+	public Map<String, Integer> toMap() {
 		return Collections.unmodifiableMap(register);
 	}
 }

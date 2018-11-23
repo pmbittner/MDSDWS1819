@@ -1,5 +1,6 @@
 package edu.mdsd.mil.interpreter;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,25 +11,31 @@ import edu.mdsd.mil.interpreter.instruction.*;
 import edu.mdsd.mil.interpreter.instruction.operation.binary.*;
 import edu.mdsd.mil.interpreter.instruction.operation.binary.comparison.*;
 import edu.mdsd.mil.interpreter.instruction.operation.unary.*;
+import utils.MathUtils;
+import utils.Output;
 
-public class MILInterpreter {
+public class MILInterpreter implements Output {
+	// Interpreters for each instruction type
 	@SuppressWarnings("rawtypes")
 	private Map<Class, InstructionInterpreter> instructionInterpreters;
 	
 	// Interpretation variables
-	private int programCounter = 0;
+	private int programPosition = 0;
 	
-	List<Instruction> instructions;
-	Map<JumpMarker, Integer> jumpMarkers;
+	private List<Instruction> instructions;
+	private Map<JumpMarker, Integer> jumpMarkers;
 	
-	OperandStack operandStack;
-	VariableRegister variableRegister;
+	private OperandStack operandStack;
+	private CallStack callStack;
+	
+	// Output
+	private PrintStream outStream, errorStream;
 	
 	
 	@SuppressWarnings({ "rawtypes", "serial" })
 	public MILInterpreter() {
 		operandStack = new OperandStack();
-		variableRegister = new VariableRegister();
+		callStack = new CallStack(this);
 		instructions = null;
 		jumpMarkers = null;
 		
@@ -37,6 +44,8 @@ public class MILInterpreter {
 				put(LoadInstruction.class, new LoadInterpreter());
 				put(PrintInstruction.class, new PrintInterpreter());
 				put(JumpInstruction.class, new JumpInterpreter());
+				put(CallInstruction.class, new CallInterpreter());
+				put(ReturnInstruction.class, new ReturnInterpreter());
 
 				put(ConditionalJumpInstruction.class, new ConditionalJumpInterpreter());
 				put(NegateInstruction.class, new NegateInterpreter());
@@ -56,25 +65,33 @@ public class MILInterpreter {
 				put(NotEqualsComparison.class, new NotEqualsInterpreter());
 			}
 		};
+		
+		outStream = System.out;
+		errorStream = System.err;
 	}
 	
 	public void initialize() {
 		operandStack.initialize();
-		variableRegister.initialize();
-		programCounter = 0;
+		callStack.initialize();
+		
+		// We define 0 as the return address of the whole program.
+		callStack.push(0);
+		
+		programPosition = 0;
+		
 	}
 	
 	public Map<String, Integer> interpret(MILModel model) {
 		parseStatements(model.getStatements());
 	
-		while (programCounter < instructions.size()) {
-			Instruction currentInstruction = instructions.get(programCounter);
-			++programCounter;
+		while (programPosition < instructions.size()) {
+			Instruction currentInstruction = instructions.get(programPosition);
+			++programPosition;
 			
 			interpret(currentInstruction);
 		}
 		
-		return variableRegister.getRegister();
+		return callStack.peek().getVariableRegister().toMap();
 	}
 	
 	private void parseStatements(List<Statement> statements) {
@@ -108,12 +125,26 @@ public class MILInterpreter {
 		throw new UnsupportedOperationException();
 	}
 	
-	// public
+	/// public ///
+	
+	public void jumpTo(int position) {
+		if (position < 0)
+			warn().println("[MILInterpreter WARNING] A jump to position " + position + " was requested, but program position smaller than 0 do not exist.");
+		else if (position > instructions.size())
+			warn().println("[MILInterpreter WARNING] A jump to position " + position + ", that is outside the program.");
+		
+		this.programPosition = MathUtils.clamp(position, 0, instructions.size());
+	}
+	
 	public void jumpTo(JumpMarker label) {
 		if (!jumpMarkers.containsKey(label))
 			throw new IllegalArgumentException("The jump label " + label + " could not be found!");
 		
-		programCounter = jumpMarkers.get(label);
+		jumpTo(jumpMarkers.get(label));
+	}
+	
+	public int getCurrentPosition() {
+		return programPosition;
 	}
 	
 	public int getRawValue(Value value) {
@@ -122,17 +153,36 @@ public class MILInterpreter {
 		}
 		
 		if (value instanceof RegisterReference) {
-			return variableRegister.get(((RegisterReference) value).getAddress());
+			return getVariableRegister().get(((RegisterReference) value).getAddress());
 		}
 		
 		throw new UnsupportedOperationException();
 	}
 	
 	public VariableRegister getVariableRegister() {
-		return variableRegister;
+		return callStack.peek().getVariableRegister();
 	}
 	
 	public OperandStack getOperandStack() {
 		return operandStack;
+	}
+	
+	public CallStack getCallStack() {
+		return callStack;
+	}
+
+	@Override
+	public PrintStream out() {
+		return outStream;
+	}
+
+	@Override
+	public PrintStream err() {
+		return errorStream;
+	}
+
+	@Override
+	public PrintStream warn() {
+		return errorStream;
 	}
 }
