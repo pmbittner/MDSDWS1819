@@ -32,12 +32,8 @@
     <genClasses image="false" ecoreClass="MIL.ecore#//BinaryOperation"/>
     <genClasses image="false" ecoreClass="MIL.ecore#//UnaryOperation"/>
     <genClasses ecoreClass="MIL.ecore#//NegateInstruction"/>
-    <genClasses ecoreClass="MIL.ecore#//JumpInstruction">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MIL.ecore#//JumpInstruction/jumpTarget"/>
-    </genClasses>
-    <genClasses ecoreClass="MIL.ecore#//ConditionalJumpInstruction">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MIL.ecore#//ConditionalJumpInstruction/jumpTarget"/>
-    </genClasses>
+    <genClasses ecoreClass="MIL.ecore#//JumpInstruction"/>
+    <genClasses ecoreClass="MIL.ecore#//ConditionalJumpInstruction"/>
     <genClasses image="false" ecoreClass="MIL.ecore#//Comparison"/>
     <genClasses ecoreClass="MIL.ecore#//EqualsComparison"/>
     <genClasses ecoreClass="MIL.ecore#//NotEqualsComparison"/>
@@ -53,5 +49,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MIL.ecore#//JumpMarker/name"/>
     </genClasses>
     <genClasses image="false" ecoreClass="MIL.ecore#//Statement"/>
+    <genClasses image="false" ecoreClass="MIL.ecore#//Jumper">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MIL.ecore#//Jumper/jumpTarget"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

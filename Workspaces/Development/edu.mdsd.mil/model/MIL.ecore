@@ -30,14 +30,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="BinaryOperation" abstract="true" eSuperTypes="#//Instruction"/>
   <eClassifiers xsi:type="ecore:EClass" name="UnaryOperation" abstract="true" eSuperTypes="#//Instruction"/>
   <eClassifiers xsi:type="ecore:EClass" name="NegateInstruction" eSuperTypes="#//UnaryOperation"/>
-  <eClassifiers xsi:type="ecore:EClass" name="JumpInstruction" eSuperTypes="#//Instruction">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="jumpTarget" lowerBound="1"
-        eType="#//JumpMarker"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ConditionalJumpInstruction" eSuperTypes="#//UnaryOperation">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="jumpTarget" lowerBound="1"
-        eType="#//JumpMarker"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JumpInstruction" eSuperTypes="#//Instruction #//Jumper"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConditionalJumpInstruction" eSuperTypes="#//UnaryOperation #//Jumper"/>
   <eClassifiers xsi:type="ecore:EClass" name="Comparison" abstract="true" eSuperTypes="#//BinaryOperation"/>
   <eClassifiers xsi:type="ecore:EClass" name="EqualsComparison" eSuperTypes="#//Comparison"/>
   <eClassifiers xsi:type="ecore:EClass" name="NotEqualsComparison" eSuperTypes="#//Comparison"/>
@@ -54,4 +48,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Statement" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Jumper" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="jumpTarget" lowerBound="1"
+        eType="#//JumpMarker"/>
+  </eClassifiers>
 </ecore:EPackage>
