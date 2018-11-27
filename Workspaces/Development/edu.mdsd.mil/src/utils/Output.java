@@ -1,9 +1,8 @@
 package utils;
 
-import java.io.PrintStream;
-
 public interface Output {
-	public PrintStream out();
-	public PrintStream err();
-	public PrintStream warn();
+	public void print(Object o);
+	public void println(Object o);
+	public void err(String s);
+	public void warn(String s);
 }

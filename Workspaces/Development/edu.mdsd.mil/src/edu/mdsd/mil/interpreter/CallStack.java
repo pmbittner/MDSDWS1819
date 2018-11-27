@@ -44,7 +44,7 @@ public class CallStack {
 		if (frames.size() > 1) {
 			return frames.pop();
 		} else {
-			output.err().println("[WARNING in CallStack] Trying to pop the last (root) element of the CallStack! Aborting and just returning top element instead!");
+			output.err("[WARNING in CallStack] Trying to pop the last (root) element of the CallStack! Aborting and just returning top element instead!");
 			return peek();
 		}
 	}

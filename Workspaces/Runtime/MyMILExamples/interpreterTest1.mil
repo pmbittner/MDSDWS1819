@@ -8,6 +8,7 @@ jmp EndProgram
 // returns a + b, just by adding 1 incrementally
 ComplicatedAdd:
 	sto a
+	sto b
 	
 	// While a != 0 {
 	ComplicatedAdd_Loop:
@@ -15,9 +16,9 @@ ComplicatedAdd:
 	lod 0
 	eq
 	jpc ComplicatedAdd_EndLoop
-		sto b
 		lod b
 		cal PlusOne
+		sto b
 		
 		// a--
 		lod a
@@ -29,6 +30,7 @@ ComplicatedAdd:
 	// }
 	ComplicatedAdd_EndLoop:
 	
+	lod b
 	ret
 
 PlusOne:

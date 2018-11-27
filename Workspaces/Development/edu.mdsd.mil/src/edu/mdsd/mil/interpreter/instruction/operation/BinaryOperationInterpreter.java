@@ -10,7 +10,8 @@ public abstract class BinaryOperationInterpreter<T extends BinaryOperation> exte
 	protected final void interpret(MILInterpreter interpreter, T instruction) {
 		int operandStackSize = interpreter.getOperandStack().size();
 		if (operandStackSize < 2) {
-			throw new IllegalArgumentException("[ERROR in " + this.getClass().getName() + "] Too few arguments (" + operandStackSize + ") on operand stack for BinaryOperation. Expected 2");
+			interpreter.out().err(this.getClass().getSimpleName() + ": Too few arguments (" + operandStackSize + ") on operand stack for BinaryOperation. Expected 2");
+			interpreter.crash();
 		} else {
 			OperandStack ops = interpreter.getOperandStack();
 			int operand2 = ops.pop();

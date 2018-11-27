@@ -1,6 +1,5 @@
 package edu.mdsd.mil.interpreter;
 
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,8 +12,9 @@ import edu.mdsd.mil.interpreter.instruction.operation.binary.comparison.*;
 import edu.mdsd.mil.interpreter.instruction.operation.unary.*;
 import utils.MathUtils;
 import utils.Output;
+import utils.SystemOutput;
 
-public class MILInterpreter implements Output {
+public class MILInterpreter {
 	// Interpreters for each instruction type
 	@SuppressWarnings("rawtypes")
 	private Map<Class, InstructionInterpreter> instructionInterpreters;
@@ -28,14 +28,15 @@ public class MILInterpreter implements Output {
 	private OperandStack operandStack;
 	private CallStack callStack;
 	
-	// Output
-	private PrintStream outStream, errorStream;
+	private Output output;
 	
 	
 	@SuppressWarnings({ "rawtypes", "serial" })
 	public MILInterpreter() {
+		output = new SystemOutput(this);
+		
 		operandStack = new OperandStack();
-		callStack = new CallStack(this);
+		callStack = new CallStack(output);
 		instructions = null;
 		jumpMarkers = null;
 		
@@ -66,8 +67,6 @@ public class MILInterpreter implements Output {
 			}
 		};
 		
-		outStream = System.out;
-		errorStream = System.err;
 	}
 	
 	public void initialize() {
@@ -78,7 +77,6 @@ public class MILInterpreter implements Output {
 		callStack.push(0);
 		
 		programPosition = 0;
-		
 	}
 	
 	public Map<String, Integer> interpret(MILModel model) {
@@ -91,7 +89,7 @@ public class MILInterpreter implements Output {
 			interpret(currentInstruction);
 		}
 		
-		return callStack.peek().getVariableRegister().toMap();
+		return getVariableRegister().toMap();
 	}
 	
 	private void parseStatements(List<Statement> statements) {
@@ -117,7 +115,7 @@ public class MILInterpreter implements Output {
 			@SuppressWarnings("rawtypes")
 			Class type = kv.getKey();
 			if (type.isInstance(instruction)) {
-				kv.getValue().interpretUntyped(this, type.cast(instruction));
+				kv.getValue().interpretUntyped(this, instruction);
 				return;
 			}
 		}
@@ -127,11 +125,16 @@ public class MILInterpreter implements Output {
 	
 	/// public ///
 	
+	public void crash() {
+		out().err("Aborting execution!");
+		jumpTo(instructions.size());
+	}
+	
 	public void jumpTo(int position) {
 		if (position < 0)
-			warn().println("[MILInterpreter WARNING] A jump to position " + position + " was requested, but program position smaller than 0 do not exist.");
+			out().warn("A jump to position " + position + " was requested, but program position smaller than 0 do not exist.");
 		else if (position > instructions.size())
-			warn().println("[MILInterpreter WARNING] A jump to position " + position + ", that is outside the program.");
+			out().warn("A jump to position " + position + ", that is outside the program.");
 		
 		this.programPosition = MathUtils.clamp(position, 0, instructions.size());
 	}
@@ -170,19 +173,8 @@ public class MILInterpreter implements Output {
 	public CallStack getCallStack() {
 		return callStack;
 	}
-
-	@Override
-	public PrintStream out() {
-		return outStream;
-	}
-
-	@Override
-	public PrintStream err() {
-		return errorStream;
-	}
-
-	@Override
-	public PrintStream warn() {
-		return errorStream;
+	
+	public Output out() {
+		return output;
 	}
 }
