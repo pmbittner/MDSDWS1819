@@ -174,6 +174,10 @@ public class MILInterpreter {
 		return callStack;
 	}
 	
+	public void setOutput(Output output) {
+		this.output = output;
+	}
+	
 	public Output out() {
 		return output;
 	}
