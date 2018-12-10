@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax">
+		<metaInformationProvider class="edu.mdsd.mil.resource.mil.mopp.MilMetaInformation" id="edu.mdsd.mil.resource.mil.mopp.MilMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension id="edu.mdsd.mil.resource.mil.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.eclipse.core.resources.problemmarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+		<super type="org.eclipse.emf.ecore.diagnostic">
+		</super>
+	</extension>
+	
+	<extension id="edu.mdsd.mil.resource.mil.problem.syntax_error" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="edu.mdsd.mil.resource.mil.problem">
+		</super>
+	</extension>
+	
+	<extension id="edu.mdsd.mil.resource.mil.problem.print_problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="edu.mdsd.mil.resource.mil.problem">
+		</super>
+	</extension>
+	
+	<extension id="edu.mdsd.mil.resource.mil.problem.unresolved_reference" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="edu.mdsd.mil.resource.mil.problem">
+		</super>
+	</extension>
+	
+	<extension id="edu.mdsd.mil.resource.mil.problem.analysis_problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="edu.mdsd.mil.resource.mil.problem">
+		</super>
+	</extension>
+	
+	<extension id="edu.mdsd.mil.resource.mil.problem.batch_constraint_problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="edu.mdsd.mil.resource.mil.problem">
+		</super>
+	</extension>
+	
+	<extension id="edu.mdsd.mil.resource.mil.problem.live_constraint_problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="edu.mdsd.mil.resource.mil.problem">
+		</super>
+	</extension>
+	
+	<extension id="edu.mdsd.mil.resource.mil.problem.builder_error" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="edu.mdsd.mil.resource.mil.problem">
+		</super>
+	</extension>
+	
+	<extension id="edu.mdsd.mil.resource.mil.nature" name="mil nature" point="org.eclipse.core.resources.natures">
+		<runtime>
+			<run class="edu.mdsd.mil.resource.mil.mopp.MilNature">
+			</run>
+		</runtime>
+		<builder id="edu.mdsd.mil.resource.mil.builder">
+		</builder>
+	</extension>
+	
+	<extension point="org.eclipse.core.resources.builders" id="edu.mdsd.mil.resource.mil.builder" name="mil Builder">
+		<builder hasNature="true">
+			<run class="edu.mdsd.mil.resource.mil.mopp.MilBuilderAdapter">
+			</run>
+		</builder>
+	</extension>
+	
+	<extension-point id="edu.mdsd.mil.resource.mil.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd">
+	</extension-point>
+	
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser class="edu.mdsd.mil.resource.mil.mopp.MilResourceFactoryDelegator" type="mil">
+		</parser>
+	</extension>
+	
+	<extension-point id="edu.mdsd.mil.resource.mil.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd">
+	</extension-point>
+	
+	<extension point="org.eclipse.debug.core.breakpoints">
+		<breakpoint class="edu.mdsd.mil.resource.mil.debug.MilLineBreakpoint" id="edu.mdsd.mil.resource.mil.debug.breakpoint" markerType="edu.mdsd.mil.resource.mil.debug.lineBreakpoint.marker" name="mil Breakpoint">
+		</breakpoint>
+	</extension>
+	
+	<extension id="edu.mdsd.mil.resource.mil.debug.lineBreakpoint.marker" point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.debug.core.lineBreakpointMarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+		<persistent value="true">
+		</persistent>
+	</extension>
+	
+	<extension point="org.eclipse.debug.core.launchConfigurationTypes">
+		<launchConfigurationType id="edu.mdsd.mil.resource.mil.ui.launchConfigurationType" delegate="edu.mdsd.mil.resource.mil.launch.MilLaunchConfigurationDelegate" modes="run,debug" name="mil Application" sourceLocatorId="edu.mdsd.mil.resource.mil.ui.sourceLocator" sourcePathComputerId="edu.mdsd.mil.resource.mil.ui.sourcePathComputer" delegateName="mil Launch Tooling" delegateDescription="This will run or debug .mil files.">
+		</launchConfigurationType>
+	</extension>
+	
+	<extension point="org.eclipse.debug.core.sourcePathComputers">
+		<sourcePathComputer class="edu.mdsd.mil.resource.mil.debug.MilSourcePathComputerDelegate" id="edu.mdsd.mil.resource.mil.ui.sourcePathComputer">
+		</sourcePathComputer>
+	</extension>
+	
+	<extension point="org.eclipse.debug.core.sourceLocators">
+		<sourceLocator id="edu.mdsd.mil.resource.mil.ui.sourceLocator" class="edu.mdsd.mil.resource.mil.debug.MilSourceLocator" name="mil Source Locator">
+		</sourceLocator>
+	</extension>
+	
+</plugin>

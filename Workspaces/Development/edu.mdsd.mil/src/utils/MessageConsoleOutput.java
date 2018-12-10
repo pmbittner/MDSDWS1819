@@ -22,6 +22,10 @@ public class MessageConsoleOutput implements Output {
 		//error.setColor(new Color(d, new RGB(1, 0, 0)));
 	}
 	
+	public MessageConsoleOutput(MessageConsole console) {
+		this(console, null);
+	}
+	
 	@Override
 	public void print(Object o) {
 		out.print(o.toString());
@@ -34,11 +38,11 @@ public class MessageConsoleOutput implements Output {
 
 	@Override
 	public void err(String s) {
-		error.println("[ERROR in line " + interpreter.getCurrentPosition() + "] " + s);
+		error.println("[ERROR" + (interpreter == null ? "" : " in line " + interpreter.getCurrentPosition()) + "] " + s);
 	}
 
 	@Override
 	public void warn(String s) {
-		warn.println("[WARNING in line " + interpreter.getCurrentPosition() + "] " + s);
+		warn.println("[WARNING" + (interpreter == null ? "" : " in line " + interpreter.getCurrentPosition()) + "] " + s);
 	}
 }

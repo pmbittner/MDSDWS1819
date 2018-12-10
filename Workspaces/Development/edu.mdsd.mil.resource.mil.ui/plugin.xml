@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax.ui">
+		<metaInformationProvider class="edu.mdsd.mil.resource.mil.ui.MilUIMetaInformation" id="edu.mdsd.mil.resource.mil.ui.MilUIMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="edu.mdsd.mil.resource.mil.ui.MilEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="mil" icon="icons/editor_icon.gif" id="edu.mdsd.mil.resource.mil.ui.MilEditor" name="EMFText mil Editor">
+			<contentTypeBinding contentTypeId="edu.mdsd.mil.resource.mil">
+			</contentTypeBinding>
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="edu.mdsd.mil.resource.mil.ui.MilPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Mil Text Editor" id="edu.mdsd.mil.resource.mil.ui.MilPreferencePage" class="edu.mdsd.mil.resource.mil.ui.MilPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		</page>
+		<page name="Syntax Coloring" id="edu.mdsd.mil.resource.mil.ui.MilSyntaxColoringPreferencePage" class="edu.mdsd.mil.resource.mil.ui.MilSyntaxColoringPreferencePage" category="edu.mdsd.mil.resource.mil.ui.MilPreferencePage">
+		</page>
+		<page name="Brackets" id="edu.mdsd.mil.resource.mil.ui.MilBracketPreferencePage" class="edu.mdsd.mil.resource.mil.ui.MilBracketPreferencePage" category="edu.mdsd.mil.resource.mil.ui.MilPreferencePage">
+		</page>
+		<page name="Content Assist" id="edu.mdsd.mil.resource.mil.ui.MilContentAssistPreferencePage" class="edu.mdsd.mil.resource.mil.ui.MilContentAssistPreferencePage" category="edu.mdsd.mil.resource.mil.ui.MilPreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="edu.mdsd.mil.resource.mil.ui.MilNewFileWizard" id="edu.mdsd.mil.resource.mil.ui.MilNewFileWizard" name="EMFText .mil file">
+		</wizard>
+		<category id="org.emftext.runtime.ui.EMFTextProjectCategory" name="EMFText Project">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextProjectCategory" icon="/icons/default_new_icon.gif" class="edu.mdsd.mil.resource.mil.ui.MilNewProjectWizard" id="edu.mdsd.mil.resource.mil.ui.MilNewProjectWizard" name="EMFText mil project" project="true">
+		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator class="edu.mdsd.mil.resource.mil.ui.MilMarkerResolutionGenerator" markerType="edu.mdsd.mil.resource.mil.problem">
+		</markerResolutionGenerator>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="edu.mdsd.mil.resource.mil.ui.MilAnnotationModelFactory" extensions="mil">
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="edu.mdsd.mil.resource.mil" name=".mil File" base-type="org.eclipse.core.runtime.text" file-extensions="mil">
+		</content-type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="mil" id="edu.mdsd.mil.resource.mil.ui.provider">
+		</provider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="edu.mdsd.mil.resource.mil.ui.occurences">
+		</type>
+		<type name="edu.mdsd.mil.resource.mil.ui.occurences.declaration" super="edu.mdsd.mil.resource.mil.ui.occurences">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="edu.mdsd.mil.resource.mil.ui.occurences" label="Occurrences (in .mil files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="mil.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="mil.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="mil.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="mil.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="mil.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="mil.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="mil.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="mil.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="mil.occurrenceTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+		<specification annotationType="edu.mdsd.mil.resource.mil.ui.occurences.declaration" label="Declarations (in .mil files)" textPreferenceKey="mil.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="mil.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="mil.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="mil.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="mil.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="mil.declarationTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.ui.commands">
+		<category description="All commands belonging to Mil" id="edu.mdsd.mil.resource.mil.ui.command.category" name="Mil">
+		</category>
+		<command categoryId="edu.mdsd.mil.resource.mil.ui.command.category" description="Toggle comment of the selected lines" id="edu.mdsd.mil.resource.mil.ui.command.togglecomment" name="Toggle Comment">
+		</command>
+	</extension>
+	
+	<extension point="org.eclipse.ui.handlers">
+		<handler class="edu.mdsd.mil.resource.mil.ui.MilToggleCommentHandler" commandId="edu.mdsd.mil.resource.mil.ui.command.togglecomment">
+		</handler>
+	</extension>
+	
+	<extension point="org.eclipse.ui.contexts">
+		<context name="Editing Mil Files" description="Editing Mil Files Context" parentId="org.eclipse.ui.textEditorScope" id="edu.mdsd.mil.resource.mil.EditorScope">
+		</context>
+	</extension>
+	
+	<extension point="org.eclipse.ui.bindings">
+		<key sequence="M1+7" commandId="edu.mdsd.mil.resource.mil.ui.command.togglecomment" schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" contextId="edu.mdsd.mil.resource.mil.EditorScope">
+		</key>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+		<launchConfigurationTypeImage icon="/icons/launch_type_icon.gif" configTypeID="edu.mdsd.mil.resource.mil.ui.launchConfigurationType" id="edu.mdsd.mil.launchImage">
+		</launchConfigurationTypeImage>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+		<launchConfigurationTabGroup type="edu.mdsd.mil.resource.mil.ui.launchConfigurationType" class="edu.mdsd.mil.resource.mil.ui.launch.MilLaunchConfigurationTabGroup" id="edu.mdsd.mil.launchConfigurationTabGroup" helpContextId="edu.mdsd.mil.launchConfigHelpContext">
+			<launchMode mode="debug" perspective="org.eclipse.debug.ui.DebugPerspective" description="Debug mil model.">
+			</launchMode>
+			<launchMode mode="run" description="Run mil model.">
+			</launchMode>
+		</launchConfigurationTabGroup>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchShortcuts">
+		<shortcut label="mil Application" icon="/icons/launch_shortcut_icon.gif" helpContextId="edu.mdsd.mil.launch" modes="run,debug" class="edu.mdsd.mil.resource.mil.ui.launch.MilLaunchShortcut" description="Launch a mil model" id="edu.mdsd.mil.launchShortcut">
+			<description description="Run mil model" mode="run">
+			</description>
+			<description description="Debug mil model" mode="debug">
+			</description>
+			<contextualLaunch>
+				<enablement>
+					<with variable="selection">
+						<count value="1">
+						</count>
+						<iterate>
+							<adapt type="org.eclipse.core.resources.IResource">
+								<test property="org.eclipse.core.resources.extension" value="mil">
+								</test>
+							</adapt>
+						</iterate>
+					</with>
+				</enablement>
+			</contextualLaunch>
+			<configurationType id="edu.mdsd.mil.resource.mil.ui.launchConfigurationType">
+			</configurationType>
+		</shortcut>
+	</extension>
+	
+	<extension point="org.eclipse.core.expressions.propertyTesters">
+		<propertyTester id="edu.mdsd.mil.PropertyTester" type="java.lang.Object" namespace="edu.mdsd.mil" properties="isLaunchable" class="edu.mdsd.mil.resource.mil.ui.MilPropertyTester">
+		</propertyTester>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="edu.mdsd.mil.resource.mil.ui.debug.lineBreakpoint" markerType="edu.mdsd.mil.resource.mil.debug.lineBreakpoint.marker" super="org.eclipse.debug.core.breakpoint">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="edu.mdsd.mil.resource.mil.ui.debug.lineBreakpoint" label="Breakpoints (in .mil files)" icon="/icons/breakpoint_icon.gif" textPreferenceKey="edu.mdsd.mil.resource.mil.ui.lineBreakpoint" textPreferenceValue="false" highlightPreferenceKey="edu.mdsd.mil.resource.mil.ui.lineBreakpointHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="edu.mdsd.mil.resource.mil.ui.lineBreakpointIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="edu.mdsd.mil.resource.mil.ui.lineBreakpointIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="edu.mdsd.mil.resource.mil.ui.lineBreakpointColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="edu.mdsd.mil.resource.mil.ui.showLineBreakpointInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="edu.mdsd.mil.resource.mil.ui.isLineBreakpointGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="edu.mdsd.mil.resource.mil.ui.isLineBreakpointGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="edu.mdsd.mil.resource.mil.ui.lineBreakpointTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.adapters">
+		<factory adaptableType="edu.mdsd.mil.resource.mil.ui.MilEditor" class="edu.mdsd.mil.resource.mil.ui.debug.MilAdapterFactory">
+			<adapter type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget">
+			</adapter>
+		</factory>
+		<factory adaptableType="edu.mdsd.mil.resource.mil.debug.MilDebugVariable" class="edu.mdsd.mil.resource.mil.ui.debug.MilAdapterFactory">
+			<adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementLabelProvider">
+			</adapter>
+		</factory>
+		<factory adaptableType="edu.mdsd.mil.resource.mil.debug.MilDebugVariable" class="edu.mdsd.mil.resource.mil.ui.debug.MilAdapterFactory">
+			<adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementContentProvider">
+			</adapter>
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.ui.popupMenus">
+		<viewerContribution id="edu.mdsd.mil.resource.mil.ui.RulerPopupActions" targetID="edu.mdsd.mil.resource.mil.EditorRuler">
+			<action id="edu.mdsd.mil.resource.mil.ui.toggleBreakpointAction" icon="icons/breakpoint_icon.gif" label="Toggle Breakpoint" class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" menubarPath="debug">
+			</action>
+		</viewerContribution>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editorActions">
+		<editorContribution targetID="edu.mdsd.mil.resource.mil.ui.MilEditor" id="edu.mdsd.mil.resource.mil.ui.BreakpointRulerActions">
+			<action id="edu.mdsd.mil.resource.mil.ui.debug.RulerToggleBreakpointAction" label="Add breakpoint" class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" actionID="RulerDoubleClick">
+			</action>
+		</editorContribution>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.debugModelPresentations">
+		<debugModelPresentation id="edu.mdsd.mil.resource.mil.debugModel" class="edu.mdsd.mil.resource.mil.ui.debug.MilDebugModelPresentation">
+		</debugModelPresentation>
+	</extension>
+	
+</plugin>

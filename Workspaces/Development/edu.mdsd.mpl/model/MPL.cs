@@ -5,6 +5,7 @@ START MPLModel
 OPTIONS {
 	reloadGeneratorModel = "true";
 	defaultTokenName = "IDENTIFIER_TOKEN";
+	overrideLaunchConfigurationDelegate = "false";
 }
 
 TOKENS {

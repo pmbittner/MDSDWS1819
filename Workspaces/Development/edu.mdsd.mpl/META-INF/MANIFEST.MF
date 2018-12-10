@@ -9,9 +9,11 @@ Bundle-Localization: plugin
 Automatic-Module-Name: edu.mdsd.mpl
 Bundle-RequiredExecutionEnvironment: JavaSE-10
 Export-Package: edu.mdsd.mpl,
+ edu.mdsd.mpl.compiler.mil,
  edu.mdsd.mpl.impl,
  edu.mdsd.mpl.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
- org.eclipse.emf.validation;visibility:=reexport
+ org.eclipse.emf.validation;visibility:=reexport,
+ edu.mdsd.mil;bundle-version="0.0.1";visibility:=reexport
 Bundle-ActivationPolicy: lazy
