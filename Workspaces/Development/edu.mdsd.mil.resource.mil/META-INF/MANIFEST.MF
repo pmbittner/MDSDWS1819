@@ -13,7 +13,7 @@ Require-Bundle: org.eclipse.core.runtime;resolution:=optional,
  org.eclipse.debug.core;resolution:=optional,
  org.emftext.commons.antlr3_4_0,
  edu.mdsd.mil,
- org.eclipse.ui.console;bundle-version="3.8.100",
+ org.eclipse.ui.console,
  org.eclipse.ui;bundle-version="3.110.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
@@ -25,4 +25,3 @@ Export-Package: edu.mdsd.mil.resource.mil,
   edu.mdsd.mil.resource.mil.grammar,
   edu.mdsd.mil.resource.mil.util
 Bundle-Activator: edu.mdsd.mil.resource.mil.mopp.MilPlugin
-Import-Package: org.eclipse.debug.ui.console

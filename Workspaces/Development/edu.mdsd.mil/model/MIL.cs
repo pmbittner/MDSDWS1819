@@ -23,7 +23,7 @@ TOKENSTYLES {
 }
 
 RULES {
-	MILModel ::= statements*;
+	MILModel ::= (statements !0)*;
 	
 	JumpMarker ::= name[IDENTIFIER_TOKEN] ":";
 

@@ -6,6 +6,8 @@
  */
 package edu.mdsd.mpl.resource.mpl.launch;
 
+import java.io.IOException;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -14,6 +16,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ui.console.ConsolePlugin;
 import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IConsoleManager;
@@ -52,6 +56,17 @@ public class MplLaunchConfigurationDelegate extends LaunchConfigurationDelegate 
 	      return myConsole;
 	}
 	
+	private void save(MILModel milModel, URI uri, Resource mplResource) {
+		Resource milResource = mplResource.getResourceSet().createResource(uri);
+		milResource.getContents().add(milModel);
+		
+		try {
+			milResource.save(Collections.EMPTY_MAP);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor) throws CoreException {
 		MplLaunchConfigurationHelper launchHelper = new MplLaunchConfigurationHelper();
 		MPLModel mplmodel = (MPLModel) launchHelper.getModelRoot(configuration);
@@ -59,10 +74,16 @@ public class MplLaunchConfigurationDelegate extends LaunchConfigurationDelegate 
 		MessageConsole mplConsole = findConsole(MPLConsoleName);
 		mplConsole.clearConsole();
 		
+		compiler.initialize();
 		compiler.setOutput(new MessageConsoleOutput(mplConsole));
 		MILModel milmodel = compiler.compile(mplmodel);
 		
 		if (milmodel != null) {
+			// save to file
+			URI mplPath = launchHelper.getURI(configuration);
+			save(milmodel, mplPath.trimFileExtension().appendFileExtension("mil"), mplmodel.eResource());
+			
+			// run
 			interpreter.setOutput(new MessageConsoleOutput(mplConsole, interpreter));
 			interpreter.initialize();
 			Map<String, Integer> output = interpreter.interpret(milmodel);

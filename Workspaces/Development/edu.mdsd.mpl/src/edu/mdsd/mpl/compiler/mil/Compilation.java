@@ -11,10 +11,6 @@ public class Compilation {
 		this.creator = creator;
 		mil = this.creator.createMILModel();
 	}
-	
-	public void append(Statement statement) {
-		mil.getStatements().add(statement);
-	}
 
 	public MILModel getMILModel() {
 		return mil;
@@ -22,5 +18,17 @@ public class Compilation {
 	
 	public MILCreator getMILCreator() {
 		return creator;
+	}
+	
+	public void add(Statement statement) {
+		mil.getStatements().add(statement);
+	}
+
+	public void addLoadInstruction(int rawValue) {
+		add(creator.createLoadInstruction(rawValue));
+	}
+
+	public void addStoreInstruction(String address) {
+		add(creator.createStoreInstruction(address));
 	}
 }
