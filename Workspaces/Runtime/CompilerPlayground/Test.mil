@@ -1,3 +1,4 @@
+ProgramImpl_someName:
 lod 0
 sto peter
 lod 0
@@ -6,6 +7,7 @@ lod 0
 sto hook
 lod 3
 lod 2
+cal FunctionImpl_Betrag
 add
 sto
 lod 0
@@ -27,22 +29,38 @@ jmp For_Begin_0
 For_End_0:
 lod 5
 sto peter
+lod 0
 lod peter
-sto peter
-For_Begin_1:
-lod peter
+sub
+cal FunctionImpl_Betrag
+sto hook
+prt"hook = "
+lod hook
+yld
+lod hook
+cal ProcedureImpl_traceAsSteve
+sto
+jmp EndProgram
+FunctionImpl_Betrag:
+lod n
 lod 0
 geq
 neg
-jpc For_End_1
-prt"peter = "
-lod peter
-yld
-lod peter
-lod 1
-sub
-sto peter
-jmp For_Begin_1
-For_End_1:
+jpc Else_1
+lod n
+ret
+jmp EndIf_1
+Else_1:
 lod 0
-sto peter
+lod n
+sub
+ret
+EndIf_1:
+sto n
+ProcedureImpl_traceAsSteve:
+lod peter
+sto Steve
+prt"Steve = "
+lod Steve
+yld
+EndProgram:

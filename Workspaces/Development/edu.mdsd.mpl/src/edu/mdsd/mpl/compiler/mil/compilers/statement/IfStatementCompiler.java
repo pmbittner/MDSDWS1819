@@ -18,8 +18,8 @@ public class IfStatementCompiler extends ElementCompiler<IfStatement> {
 		// neg
 		compilation.add(compilation.getMILCreator().createNegateInstruction());
 		
-		JumpMarker endifMarker = compilation.getMILCreator().createJumpMarker("EndIf_" + salt);
-		JumpMarker elseMarker = elseBlock == null ? endifMarker : compilation.getMILCreator().createJumpMarker("Else_" + salt);
+		JumpMarker endifMarker = compilation.getOrCreateJumpMarker("EndIf_" + salt);
+		JumpMarker elseMarker = elseBlock == null ? endifMarker : compilation.getOrCreateJumpMarker("Else_" + salt);
 		
 		// jpc else
 		compilation.add(compilation.getMILCreator().createConditionalJumpInstruction(elseMarker));

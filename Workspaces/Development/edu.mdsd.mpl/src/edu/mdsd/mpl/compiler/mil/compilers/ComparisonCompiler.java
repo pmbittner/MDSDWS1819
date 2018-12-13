@@ -42,7 +42,7 @@ public class ComparisonCompiler extends ElementCompiler<Comparison> {
 			break;
 		}
 		default: {
-			throw new UnsupportedOperationException("The comparions operator '" + element.getOperator() + "' is not supported by the compiler!");
+			compiler.error("The comparions operator '" + element.getOperator() + "' is not supported!");
 		}
 		}
 		

@@ -1,6 +1,7 @@
 package edu.mdsd.mpl.util;
 
 import edu.mdsd.mil.AddInstruction;
+import edu.mdsd.mil.CallInstruction;
 import edu.mdsd.mil.ConditionalJumpInstruction;
 import edu.mdsd.mil.ConstantInteger;
 import edu.mdsd.mil.JumpInstruction;
@@ -151,5 +152,12 @@ public class EcoreMILCreator implements MILCreator {
 		PrintInstruction prt = factory.createPrintInstruction();
 		prt.setText(quote + string + quote);
 		return prt;
+	}
+
+	@Override
+	public Statement createCallInstruction(JumpMarker target) {
+		CallInstruction cal = factory.createCallInstruction();
+		cal.setJumpTarget(target);
+		return cal;
 	}
 }

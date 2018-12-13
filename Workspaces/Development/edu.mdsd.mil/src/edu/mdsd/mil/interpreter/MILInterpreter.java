@@ -141,7 +141,7 @@ public class MILInterpreter {
 	
 	public void jumpTo(JumpMarker label) {
 		if (!jumpMarkers.containsKey(label))
-			throw new IllegalArgumentException("The jump label " + label + " could not be found!");
+			throw new IllegalArgumentException("The jump label " + label.getName() + " could not be found!");
 		
 		jumpTo(jumpMarkers.get(label));
 	}

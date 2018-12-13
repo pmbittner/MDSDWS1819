@@ -1,13 +1,26 @@
 Program someName
 	Variables peter, pan, hook.
 	
-	3 + 2.
+	3 + Betrag(2).
 	
 	For peter := 0 To 5 Do
 		Trace(peter).
 	End.
 	
-	For peter := peter Down To 0 Do
-		Trace(peter).
+	hook := Betrag(- peter).
+	Trace(hook).
+	traceAsSteve(hook).
+End.
+
+Function Betrag(n)
+	If (n >= 0) Then
+		Return n.
+	Else
+		Return - n.
 	End.
+End.
+
+Procedure traceAsSteve(peter)
+	Variables Steve := peter.
+	Trace(Steve).
 End.

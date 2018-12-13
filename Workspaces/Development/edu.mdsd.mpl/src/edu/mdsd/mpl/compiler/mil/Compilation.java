@@ -1,7 +1,12 @@
 package edu.mdsd.mpl.compiler.mil;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import edu.mdsd.mil.JumpMarker;
 import edu.mdsd.mil.MILModel;
 import edu.mdsd.mil.Statement;
+import edu.mdsd.mpl.Operation;
 import edu.mdsd.mpl.Variable;
 import edu.mdsd.mpl.util.MILCreator;
 
@@ -9,8 +14,11 @@ public class Compilation {
 	private MILCreator creator;
 	private MILModel mil;
 	
+	private Map<String, JumpMarker> jumpMarkers;
+	
 	public Compilation(MILCreator creator) {
 		this.creator = creator;
+		this.jumpMarkers = new HashMap<>();
 		mil = this.creator.createMILModel();
 	}
 
@@ -44,5 +52,18 @@ public class Compilation {
 
 	private void addStoreInstruction(String address) {
 		add(creator.createStoreInstruction(address));
+	}
+	
+	public JumpMarker getOrCreateJumpMarker(Operation operation) {
+		return getOrCreateJumpMarker(operation.getClass().getSimpleName() + "_" + operation.getName());
+	}
+	
+	public JumpMarker getOrCreateJumpMarker(String name) {
+		JumpMarker marker = jumpMarkers.get(name);
+		
+		if (marker == null)
+			jumpMarkers.put(name, marker = creator.createJumpMarker(name));
+		
+		return marker;
 	}
 }

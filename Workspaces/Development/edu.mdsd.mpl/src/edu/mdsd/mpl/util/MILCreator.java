@@ -35,4 +35,5 @@ public interface MILCreator {
 	public Statement createGreaterEqualsComparison();
 
 	public Statement createPrintInstruction(String string);
+	public Statement createCallInstruction(JumpMarker target);
 }

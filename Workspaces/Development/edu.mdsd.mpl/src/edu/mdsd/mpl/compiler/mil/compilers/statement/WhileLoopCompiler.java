@@ -14,8 +14,8 @@ public class WhileLoopCompiler extends ElementCompiler<WhileLoop> {
 		String salt = compiler.generateUniqueName();
 		MILCreator factory = compilation.getMILCreator();
 		
-		JumpMarker whileBegin = factory.createJumpMarker("While_Begin_" + salt);
-		JumpMarker whileEnd   = factory.createJumpMarker("While_End_" + salt);
+		JumpMarker whileBegin = compilation.getOrCreateJumpMarker("While_Begin_" + salt);
+		JumpMarker whileEnd   = compilation.getOrCreateJumpMarker("While_End_" + salt);
 		
 		compilation.add(whileBegin);
 		compiler.compile(element.getCondition(), compilation);

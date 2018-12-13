@@ -17,8 +17,8 @@ public class ForLoopCompiler extends ElementCompiler<ForLoop> {
 		
 		Variable index = element.getIndex().getLeftHandSide().getVariable();
 		
-		JumpMarker forBegin = factory.createJumpMarker("For_Begin_" + salt);
-		JumpMarker forEnd   = factory.createJumpMarker("For_End_" + salt);
+		JumpMarker forBegin = compilation.getOrCreateJumpMarker("For_Begin_" + salt);
+		JumpMarker forEnd   = compilation.getOrCreateJumpMarker("For_End_" + salt);
 		
 		compiler.compile(element.getIndex(), compilation);
 		compilation.add(forBegin);

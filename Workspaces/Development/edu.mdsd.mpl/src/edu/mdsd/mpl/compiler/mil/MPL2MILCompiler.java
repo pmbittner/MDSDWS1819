@@ -13,12 +13,15 @@ import edu.mdsd.mpl.Comparison;
 import edu.mdsd.mpl.DivExpression;
 import edu.mdsd.mpl.ExpressionStatement;
 import edu.mdsd.mpl.ForLoop;
+import edu.mdsd.mpl.Function;
 import edu.mdsd.mpl.IfStatement;
 import edu.mdsd.mpl.LiteralValue;
 import edu.mdsd.mpl.MPLModel;
 import edu.mdsd.mpl.MultExpression;
 import edu.mdsd.mpl.Operation;
+import edu.mdsd.mpl.OperationCall;
 import edu.mdsd.mpl.ParenthesisExpression;
+import edu.mdsd.mpl.Procedure;
 import edu.mdsd.mpl.Program;
 import edu.mdsd.mpl.ReturnStatement;
 import edu.mdsd.mpl.SubExpression;
@@ -32,6 +35,7 @@ import edu.mdsd.mpl.compiler.mil.compilers.ComparisonCompiler;
 import edu.mdsd.mpl.compiler.mil.compilers.ElementCompiler;
 import edu.mdsd.mpl.compiler.mil.compilers.VariableDeclarationCompiler;
 import edu.mdsd.mpl.compiler.mil.compilers.expression.atomic.LiteralValueCompiler;
+import edu.mdsd.mpl.compiler.mil.compilers.expression.atomic.OperationCallCompiler;
 import edu.mdsd.mpl.compiler.mil.compilers.expression.atomic.VariableReferenceCompiler;
 import edu.mdsd.mpl.compiler.mil.compilers.expression.binary.AddExpressionCompiler;
 import edu.mdsd.mpl.compiler.mil.compilers.expression.binary.DivExpressionCompiler;
@@ -39,6 +43,8 @@ import edu.mdsd.mpl.compiler.mil.compilers.expression.binary.MultExpressionCompi
 import edu.mdsd.mpl.compiler.mil.compilers.expression.binary.SubExpressionCompiler;
 import edu.mdsd.mpl.compiler.mil.compilers.expression.unary.ParenthesisExpressionCompiler;
 import edu.mdsd.mpl.compiler.mil.compilers.expression.unary.UnaryMinusExpressionCompiler;
+import edu.mdsd.mpl.compiler.mil.compilers.operation.FunctionCompiler;
+import edu.mdsd.mpl.compiler.mil.compilers.operation.ProcedureCompiler;
 import edu.mdsd.mpl.compiler.mil.compilers.operation.ProgramCompiler;
 import edu.mdsd.mpl.compiler.mil.compilers.statement.AssignmentStatementCompiler;
 import edu.mdsd.mpl.compiler.mil.compilers.statement.BlockCompiler;
@@ -66,6 +72,8 @@ public class MPL2MILCompiler {
 		
 		// Operations
 		registerCompiler(Program.class, new ProgramCompiler());
+		registerCompiler(Function.class, new FunctionCompiler());
+		registerCompiler(Procedure.class, new ProcedureCompiler());
 		
 		// Arbitrary
 		registerCompiler(VariableDeclaration.class, new VariableDeclarationCompiler());
@@ -84,7 +92,7 @@ public class MPL2MILCompiler {
 		
 		// Expressions
 		registerCompiler(LiteralValue.class, new LiteralValueCompiler());
-		//registerCompiler(OperationCall.class, new OperationCallCompiler());
+		registerCompiler(OperationCall.class, new OperationCallCompiler());
 		registerCompiler(VariableReference.class, new VariableReferenceCompiler());
 		
 		registerCompiler(AddExpression.class, new AddExpressionCompiler());
@@ -101,6 +109,8 @@ public class MPL2MILCompiler {
 	}
 
 	public MILModel compile(MPLModel mpl) {
+		out().println("[Compiler] start  ==========");
+		
 		Compilation compilation = new Compilation(new EcoreMILCreator());
 		
 		compile(mpl.getProgram(), compilation);
@@ -108,6 +118,10 @@ public class MPL2MILCompiler {
 		for (Operation op : mpl.getOperations()) {
 			compile(op, compilation);
 		}
+		
+		compilation.add(compilation.getOrCreateJumpMarker("EndProgram"));
+
+		out().println("[Compiler] done   ==========");
 		
 		return compilation.getMILModel();
 	}
@@ -159,5 +173,11 @@ public class MPL2MILCompiler {
 			return compiler;
 		
 		throw new UnsupportedOperationException("Unsupported type: " + element.getClass());
+	}
+
+	public void error(String message) {
+		String enhancedMessage = message + "\nAborting execution!";
+		out().err(enhancedMessage);
+		throw new RuntimeException(enhancedMessage);
 	}
 }
