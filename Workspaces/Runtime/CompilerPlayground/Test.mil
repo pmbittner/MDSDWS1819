@@ -2,3 +2,47 @@ lod 0
 sto peter
 lod 0
 sto pan
+lod 0
+sto hook
+lod 3
+lod 2
+add
+sto
+lod 0
+sto peter
+For_Begin_0:
+lod peter
+lod 5
+leq
+neg
+jpc For_End_0
+prt"peter = "
+lod peter
+yld
+lod peter
+lod 1
+add
+sto peter
+jmp For_Begin_0
+For_End_0:
+lod 5
+sto peter
+lod peter
+sto peter
+For_Begin_1:
+lod peter
+lod 0
+geq
+neg
+jpc For_End_1
+prt"peter = "
+lod peter
+yld
+lod peter
+lod 1
+sub
+sto peter
+jmp For_Begin_1
+For_End_1:
+lod 0
+sto peter

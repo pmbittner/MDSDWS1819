@@ -86,6 +86,6 @@ RULES {
 	@Operator(type="primitive", weight="2", superclass="Statement")
 	WhileLoop ::= "While" "(" condition ")" "Do" block "End" ".";
 	@Operator(type="primitive", weight="2", superclass="Statement")
-	ForLoop ::= "For" index increment["" : "Down"] "To" upperBound[INTEGER_TOKEN] block "End" ".";
+	ForLoop ::= "For" index increment["" : "Down"] "To" upperBound[INTEGER_TOKEN] "Do" block "End" ".";
 	
 }

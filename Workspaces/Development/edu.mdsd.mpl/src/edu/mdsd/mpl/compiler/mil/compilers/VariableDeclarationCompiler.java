@@ -17,7 +17,7 @@ public class VariableDeclarationCompiler extends ElementCompiler<VariableDeclara
 			compiler.compile(initialValue, compilation);
 		}
 		
-		compilation.addStoreInstruction(element.getVariable().getName());
+		compilation.addStoreInstruction(element.getVariable());
 	}
 
 }

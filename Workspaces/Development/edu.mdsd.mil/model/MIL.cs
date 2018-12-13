@@ -10,7 +10,7 @@ OPTIONS {
 TOKENS {
 	DEFINE IDENTIFIER_TOKEN $('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*$;
 	DEFINE INTEGER_TOKEN $('-')?('0'..'9')+$;
-	DEFINE STRING_TOKEN $ '"' ('a'..'z'|'A'..'Z'|'_'|'0'..'9'|$ + WHITESPACE + $|'\\n')* '"'$;
+	DEFINE STRING_TOKEN $ '"' ('a'..'z'|'A'..'Z'|'_'|'0'..'9'|'='|$ + WHITESPACE + $|'\\n')* '"'$;
 	
 	DEFINE SL_COMMENT $'//'(~('\n'|'\r'|'\uffff'))*$;
 	DEFINE ML_COMMENT $'/*'.*'*/'$;
