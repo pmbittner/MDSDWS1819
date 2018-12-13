@@ -90,10 +90,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="assignment" lowerBound="1"
         eType="#//Assignment" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Function" eSuperTypes="#//Operation">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="returnValue" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Function" eSuperTypes="#//Operation"/>
   <eClassifiers xsi:type="ecore:EClass" name="Procedure" eSuperTypes="#//Operation"/>
   <eClassifiers xsi:type="ecore:EClass" name="Operation" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"

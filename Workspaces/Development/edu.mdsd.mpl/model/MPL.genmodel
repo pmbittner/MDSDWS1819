@@ -72,9 +72,7 @@
     <genClasses ecoreClass="MPL.ecore#//AssignmentStatement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//AssignmentStatement/assignment"/>
     </genClasses>
-    <genClasses ecoreClass="MPL.ecore#//Function">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MPL.ecore#//Function/returnValue"/>
-    </genClasses>
+    <genClasses ecoreClass="MPL.ecore#//Function"/>
     <genClasses ecoreClass="MPL.ecore#//Procedure"/>
     <genClasses image="false" ecoreClass="MPL.ecore#//Operation">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//Operation/parameters"/>
