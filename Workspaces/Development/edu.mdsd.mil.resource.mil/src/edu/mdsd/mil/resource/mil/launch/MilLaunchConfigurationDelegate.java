@@ -6,6 +6,8 @@
  */
 package edu.mdsd.mil.resource.mil.launch;
 
+import java.io.IOException;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -14,6 +16,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ui.console.ConsolePlugin;
 import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IConsoleManager;
@@ -21,6 +25,7 @@ import org.eclipse.ui.console.MessageConsole;
 
 import edu.mdsd.mil.MILModel;
 import edu.mdsd.mil.interpreter.MILInterpreter;
+import edu.mdsd.milb.compiler.MIL2MILBCompiler;
 import utils.MessageConsoleOutput;
 
 /**
@@ -34,7 +39,9 @@ public class MilLaunchConfigurationDelegate extends LaunchConfigurationDelegate 
 	public final static String ATTR_RESOURCE_URI = "uri";
 	
 	private final static String MILConsoleName = "MIL Console";
+	private final static String MILBConsoleName = "MILB Console";
 	private MILInterpreter interpreter = new MILInterpreter();
+	private MIL2MILBCompiler binaryCompiler = new MIL2MILBCompiler();
 	
 	//*
 	private MessageConsole findConsole(String name) {
@@ -61,7 +68,9 @@ public class MilLaunchConfigurationDelegate extends LaunchConfigurationDelegate 
 		//new edu.mdsd.mil.resource.mil.launch.MilLaunchConfigurationHelper().launch(configuration, mode, launch, monitor);
 		
 		MessageConsole milConsole = findConsole(MILConsoleName);
+		MessageConsole milbConsole = findConsole(MILBConsoleName);
 		milConsole.clearConsole();
+		milbConsole.clearConsole();
 		
 		interpreter.setOutput(new MessageConsoleOutput(milConsole, interpreter));
 		interpreter.initialize();
@@ -71,6 +80,11 @@ public class MilLaunchConfigurationDelegate extends LaunchConfigurationDelegate 
 		for (Entry<String, Integer> kv : output.entrySet()) {
 			interpreter.out().println("  " + kv.getKey() + " = " + kv.getValue());
 		}
+		
+		// Compile to milb
+		binaryCompiler.setOutput(new MessageConsoleOutput(milbConsole));
+		binaryCompiler.initialize();
+		binaryCompiler.compile(milmodel);
 	}
 	
 }

@@ -12,6 +12,7 @@ Export-Package: edu.mdsd.mil,
  edu.mdsd.mil.impl,
  edu.mdsd.mil.interpreter,
  edu.mdsd.mil.util,
+ edu.mdsd.milb.compiler,
  utils
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport

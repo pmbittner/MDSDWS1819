@@ -32,6 +32,11 @@ public class MessageConsoleOutput implements Output {
 	}
 
 	@Override
+	public void println() {
+		out.println();
+	}
+
+	@Override
 	public void println(Object o) {
 		out.println(o.toString());
 	}

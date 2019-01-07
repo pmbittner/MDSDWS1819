@@ -19,6 +19,10 @@ public class SystemOutput implements Output {
 		outStream.print(o.toString());
 	}
 
+	public void println() {
+		outStream.println();
+	}
+
 	public void println(Object o) {
 		outStream.println(o.toString());
 	}

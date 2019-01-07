@@ -1,5 +1,8 @@
 //Example 1
 lod 5
 lod 10
+jmp EndProgram
 add
-sto x
+sto
+EndProgram:
+lod 1
