@@ -17,7 +17,7 @@ public class MIL2MILBCompiler {
 	}
 	
 	public void initialize() {
-		instructionCompiler.initialize(output);
+		instructionCompiler.initialize();
 	}
 	
 	public Milbe compile(MILModel mil) {

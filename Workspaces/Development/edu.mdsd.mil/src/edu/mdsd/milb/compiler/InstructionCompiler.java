@@ -28,7 +28,6 @@ import edu.mdsd.mil.StoreInstruction;
 import edu.mdsd.mil.SubInstruction;
 import edu.mdsd.mil.Value;
 import edu.mdsd.mil.YieldInstruction;
-import utils.Output;
 
 public class InstructionCompiler {
 	private static class Delegate<T extends Instruction> {
@@ -46,7 +45,7 @@ public class InstructionCompiler {
 	
 	@SuppressWarnings("rawtypes")
 	private Map<Class, Delegate> compilers;
-	private Output out;
+	private StringAvoider<Integer> variableNameTranslator;
 	
 	private <T extends Instruction> Delegate<T> register(Class<T> cls) {
 		Delegate<T> del = new Delegate<T>();
@@ -60,10 +59,10 @@ public class InstructionCompiler {
 	
 	public InstructionCompiler() {
 		compilers = new HashMap<>();
+		variableNameTranslator = new StringAvoider<>(new StringAvoider.UniqueIntGenerator());
 	}
 
 	public void compileInstruction(Instruction i, Milbe milb) {
-		out.println("[InstructionCompiler::compileInstruction] " + i.getClass().getSimpleName());
 		for (@SuppressWarnings("rawtypes") Entry<Class, Delegate> kv : compilers.entrySet()) {
 			@SuppressWarnings("rawtypes")
 			Class type = kv.getKey();
@@ -74,8 +73,7 @@ public class InstructionCompiler {
 		}
 	}
 	
-	public void initialize(Output out) {
-		this.out = out;
+	public void initialize() {
 		compilers.clear();
 		
 		register(ReturnInstruction.class, ByteCode.RET);
@@ -104,7 +102,8 @@ public class InstructionCompiler {
 				m.pushArgument(((ConstantInteger) val).getRawValue());
 			} else if (val instanceof RegisterReference) {
 				m.pushInstruction(ByteCode.LDV);
-				m.pushArgument(((RegisterReference) val).getAddress());
+				String variableName = ((RegisterReference) val).getAddress();
+				m.pushArgument(variableNameTranslator.translate(variableName));
 			}
 		});
 		
@@ -115,7 +114,7 @@ public class InstructionCompiler {
 				m.pushInstruction(ByteCode.STO);
 			} else {
 				m.pushInstruction(ByteCode.STT);
-				m.pushArgument(rr.getAddress());
+				m.pushArgument(variableNameTranslator.translate(rr.getAddress()));
 			}
 		});
 		

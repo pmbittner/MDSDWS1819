@@ -1,6 +1,7 @@
 package edu.mdsd.milb.compiler;
 
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -82,7 +83,7 @@ public class Milbe {
 	}
 	
 	public void pushArgument(String arg) {
-		pushArgument(arg.getBytes());
+		pushArgument(arg.getBytes(StandardCharsets.UTF_8));
 	}
 	
 	public void pushArgument(JumpMarker marker) {
