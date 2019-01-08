@@ -20,7 +20,7 @@ public class MIL2MILBCompiler {
 		instructionCompiler.initialize();
 	}
 	
-	public Milbe compile(MILModel mil) {
+	public void compile(MILModel mil, String exportPath) {
 		out().println("Compiling to binary format");
 		
 		Milbe milb = new Milbe();
@@ -40,7 +40,8 @@ public class MIL2MILBCompiler {
 			out().println();
 		}
 		
-		return milb;
+		MilbeExporter exporter = new MilbeExporter();
+		exporter.writeToFile(milb, exportPath, output);
 	}
 
 	private void compile(Statement statement, Milbe milb) {

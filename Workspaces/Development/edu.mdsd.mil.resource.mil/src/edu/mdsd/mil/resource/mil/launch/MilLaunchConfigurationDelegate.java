@@ -6,18 +6,18 @@
  */
 package edu.mdsd.mil.resource.mil.launch;
 
-import java.io.IOException;
-import java.util.Collections;
+import java.io.File;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ui.console.ConsolePlugin;
 import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IConsoleManager;
@@ -82,9 +82,17 @@ public class MilLaunchConfigurationDelegate extends LaunchConfigurationDelegate 
 		}
 		
 		// Compile to milb
+		IWorkspace workspace = ResourcesPlugin.getWorkspace();
+		File workspaceDirectory = workspace.getRoot().getLocation().toFile();
+		
+		URI milUri = launchHelper.getURI(configuration);
+		milUri = milUri.trimFileExtension().appendFileExtension("milb");
+		String milFileString = milUri.toPlatformString(false);
+		File milFile = new File(milFileString);
+		
 		binaryCompiler.setOutput(new MessageConsoleOutput(milbConsole));
 		binaryCompiler.initialize();
-		binaryCompiler.compile(milmodel);
+		binaryCompiler.compile(milmodel, workspaceDirectory + milFile.toString());
 	}
 	
 }

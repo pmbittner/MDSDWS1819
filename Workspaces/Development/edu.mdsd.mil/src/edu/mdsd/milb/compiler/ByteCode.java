@@ -1,7 +1,7 @@
 package edu.mdsd.milb.compiler;
 
 public enum ByteCode {
-	// no arguments
+	// nullary
 	NOOP,
 	
 	RET,
@@ -22,7 +22,7 @@ public enum ByteCode {
 	
 	YLD,
 	
-	// 1 argument
+	// unary
 	LOD,
 	LDV, // load var
 	STO,

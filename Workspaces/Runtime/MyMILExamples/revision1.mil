@@ -1,1 +1,6 @@
-//Example 1
+lod 1
+yld
+jmp EndProgram
+lod 0
+yld
+EndProgram:
