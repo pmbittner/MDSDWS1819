@@ -13,6 +13,11 @@ public abstract class OperationCompiler<T extends Operation> extends ElementComp
 		// create globally unique function name: Currently this is the function name itself
 		compilation.add(compilation.getOrCreateJumpMarker(element));
 		
+		// store parameters, that live on operand stack
+		for (VariableDeclaration parameter : element.getParameters()) {
+			compilation.addStoreInstruction(parameter.getVariable());
+		}
+		
 		for (VariableDeclaration vardec : element.getVariableDeclarations()) {
 			compiler.compile(vardec, compilation);
 		}

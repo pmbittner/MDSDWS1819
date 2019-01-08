@@ -1,6 +1,7 @@
 package edu.mdsd.milb.compiler;
 
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,7 +49,7 @@ public class Milbe {
 	}
 	
 	private static byte[] toBytes(int arg) {
-		return ByteBuffer.allocate(Integer.BYTES).putInt(arg).array();
+		return ByteBuffer.allocate(Integer.BYTES).order(ByteOrder.LITTLE_ENDIAN).putInt(arg).array();
 	}
 	
 	private ArrayList<Byte> bytes;
