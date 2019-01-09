@@ -9,7 +9,7 @@
 
 namespace PAX {
     namespace Milbe {
-        void(*Interpreter::instructionInterpreters[InstructionNumeral(LastInstruction) + 1])(Program&, Interpreter&);
+        //void(*Interpreter::instructionInterpreters[InstructionNumeral(LastInstruction) + 1])(Program&, Interpreter&);
 
         static inline InstructionNumeral readNextInstruction(Program & program, Instruction & instruction) {
             Byte b;
@@ -19,10 +19,6 @@ namespace PAX {
         }
 
         Interpreter::Interpreter() = default;
-
-        void Interpreter::initialize() {
-            initFunctionTable<Instruction(0)>();
-        }
 
         void Interpreter::interpret(PAX::Milbe::Program &program) {
             currentAddress = 0;
@@ -39,7 +35,7 @@ namespace PAX {
                     break;
                 }
 
-                instructionInterpreters[instructionIndex](program, *this);
+                InstructionInterpreters.at(instructionIndex)(program, *this);
             }
         }
 

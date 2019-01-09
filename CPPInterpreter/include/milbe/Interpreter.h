@@ -7,6 +7,7 @@
 
 #include <sstream>
 #include <iostream>
+#include <array>
 
 #include "Program.h"
 #include "Instruction.h"
@@ -46,39 +47,42 @@ namespace PAX {
         PAX_MILBE_INTERPRETER_SUPPORTS(MUL)
         PAX_MILBE_INTERPRETER_SUPPORTS(DIV)
 
+        PAX_MILBE_INTERPRETER_SUPPORTS(EQ)
+        PAX_MILBE_INTERPRETER_SUPPORTS(NEQ)
+        PAX_MILBE_INTERPRETER_SUPPORTS(LT)
+        PAX_MILBE_INTERPRETER_SUPPORTS(LEQ)
+        PAX_MILBE_INTERPRETER_SUPPORTS(GT)
+        PAX_MILBE_INTERPRETER_SUPPORTS(GEQ)
+
         PAX_MILBE_INTERPRETER_SUPPORTS(YLD)
         PAX_MILBE_INTERPRETER_SUPPORTS(PRT)
+
+        using InterpretFunction = void (*)(Program &, Interpreter &);
+        constexpr size_t FunctionTableSize = size_t(LastInstruction) + 1;
+        using FunctionTable = std::array<InterpretFunction, FunctionTableSize>;
+
+        namespace detail {
+            template<size_t... i>
+            constexpr FunctionTable createFunctionTable(std::index_sequence<i...>) noexcept {
+                return FunctionTable{{&interpretInstruction<Instruction(i)>...}};
+            }
+
+            constexpr FunctionTable createFunctionTable() noexcept {
+                return createFunctionTable(std::make_index_sequence<FunctionTableSize>{});
+            }
+        }
+
+        constexpr FunctionTable InstructionInterpreters = detail::createFunctionTable();
 
         /**
          * Convention for reading: LITTLE_ENDIAN
          */
         class Interpreter {
-            template<Instruction instruction>
-            friend void interpretInstruction(Program & program, Interpreter & interpreter);
-
-            // Array of function pointers with length = LastInstruction
-            static void(*instructionInterpreters[static_cast<int>(LastInstruction) + 1])(Program&, Interpreter&);
-
-            OperandStack operandStack;
-            CallStack callStack;
-
+        public:
             // we need this because std::ifstream::tellg is not reliable
             ProgramAddress currentAddress;
-
-        public:
-            template<Instruction i>
-            static void initFunctionTable() {
-                constexpr auto index = InstructionNumeral(i);
-                instructionInterpreters[index] = &interpretInstruction<i>;
-                initFunctionTable<Instruction(index + 1)>();
-            }
-
-            template<>
-            static void initFunctionTable<LastInstruction>() {
-                instructionInterpreters[LastInstructionIndex] = &interpretInstruction<LastInstruction>;
-            }
-
-            static void initialize();
+            OperandStack operandStack;
+            CallStack callStack;
 
             Interpreter();
 

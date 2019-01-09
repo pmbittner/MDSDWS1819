@@ -23,7 +23,6 @@ int main(int args, char** argv) {
         return 1;
     }
 
-    PAX::Milbe::Interpreter::initialize();
     PAX::Milbe::Interpreter interpreter;
 
     {
