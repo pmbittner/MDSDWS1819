@@ -10,7 +10,6 @@
 
 namespace PAX {
     namespace Milbe {
-        // TODO: Make this more efficient
         using VariableRegister = std::unordered_map<Variable, Value>;
     }
 }

@@ -134,8 +134,19 @@ public class InstructionCompiler {
 		});
 		
 		register(PrintInstruction.class).set((p, m) -> {
-			m.pushInstruction(ByteCode.PRT);
-			m.pushArgument(p.getText());
+			String msg = p.getText();
+			// Remove starting end ending "
+			msg = msg.substring(1, msg.length() - 1);
+			
+			// optimize empty prints out
+			if (!msg.isEmpty()) {
+				// Twice for Java
+				// Twice for replaceAll expecting a regex
+				msg = msg.replaceAll("\\\\n", "\n");
+				
+				m.pushInstruction(ByteCode.PRT);
+				m.pushArgument(msg);
+			}
 		});
 	}
 }

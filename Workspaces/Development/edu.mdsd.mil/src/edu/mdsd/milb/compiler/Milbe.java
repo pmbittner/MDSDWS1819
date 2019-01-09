@@ -2,7 +2,9 @@ package edu.mdsd.milb.compiler;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.nio.charset.StandardCharsets;
+import java.nio.CharBuffer;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -54,10 +56,12 @@ public class Milbe {
 	
 	private ArrayList<Byte> bytes;
 	private Map<String, JumpLabel> jumpTargets;
+	private CharsetEncoder stringEncoder;
 	
 	public Milbe() {
 		bytes = new ArrayList<>();
 		jumpTargets = new HashMap<>();
+		stringEncoder = Charset.forName("ISO-8859-1").newEncoder();
 	}
 	
 	public void pushInstruction(ByteCode bytecode) {
@@ -83,8 +87,15 @@ public class Milbe {
 		pushArgument(toBytes(arg));
 	}
 	
-	public void pushArgument(String arg) {
-		pushArgument(arg.getBytes(StandardCharsets.UTF_8));
+	public void pushArgument(String str) {
+		int len = str.length();
+		byte b[] = new byte[len + 1];
+		ByteBuffer bbuf = ByteBuffer.wrap(b);
+		stringEncoder.encode(CharBuffer.wrap(str), bbuf, true);
+		// you might want to ensure that bbuf.position() == len
+		b[len] = 0;
+		
+		pushArgument(b);
 	}
 	
 	public void pushArgument(JumpMarker marker) {

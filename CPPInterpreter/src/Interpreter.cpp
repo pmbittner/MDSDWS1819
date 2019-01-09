@@ -31,18 +31,19 @@ namespace PAX {
 
             Instruction currentInstruction = Instruction::NOOP;
             InstructionNumeral currentInstructionNumeral;
+
             while (true) {
                 currentInstructionNumeral = readNextInstruction(program, currentInstruction);
                 currentAddress += sizeof(Instruction);
 
-                //std::cout << "[Interpreter::interpret] Found instruction " << currentInstructionNumeral << std::endl;
                 if (currentInstructionNumeral > InstructionNumeral(LastInstruction)) {
-                    std::cout << "[Interpreter::interpret] EOF Hack" << std::endl;
                     break;
                 }
 
                 instructionInterpreters[currentInstructionNumeral](program, *this);
             }
+
+            std::cout << "[Interpreter::interpret] Done" << std::endl;
         }
 
 #define PAX_MILBE_READ(name) { \
@@ -138,6 +139,22 @@ void interpretInstruction<Instruction::name>(Program & program, Interpreter & in
         void interpretInstruction<Instruction::YLD>(Program & program, Interpreter & interpreter) {
             Value val = PAX_MILBE_POP_OPERANDSTACK;
             std::cout << val << std::endl;
+        }
+
+        template<>
+        void interpretInstruction<Instruction::PRT>(Program & program, Interpreter & interpreter) {
+            // read chars until we reach the 0 termination
+            std::string str;
+            char next;
+            // We do not expect empty strings here, so this is ok.
+            PAX_MILBE_READ(next)
+
+            while(next != '\0') {
+                str += next;
+                PAX_MILBE_READ(next)
+            }
+
+            std::cout << str;
         }
 
         PAX_MILBE_GENERATE_BINARY_OPERATION(ADD, +)
