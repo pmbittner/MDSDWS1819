@@ -9,15 +9,14 @@
 
 namespace PAX {
     namespace Milbe {
-        // TODO: Make this faster and more readable
+        void(*Interpreter::instructionInterpreters[InstructionNumeral(LastInstruction) + 1])(Program&, Interpreter&);
+
         static inline InstructionNumeral readNextInstruction(Program & program, Instruction & instruction) {
             Byte b;
             program.read(&b, sizeof(char));
             instruction = static_cast<Instruction>(b);
             return InstructionNumeral(instruction);
         }
-
-        void(*Interpreter::instructionInterpreters[InstructionNumeral(LastInstruction) + 1])(Program&, Interpreter&);
 
         Interpreter::Interpreter() = default;
 
@@ -29,18 +28,18 @@ namespace PAX {
             currentAddress = 0;
             callStack.push(currentAddress);
 
-            Instruction currentInstruction = Instruction::NOOP;
-            InstructionNumeral currentInstructionNumeral;
+            Instruction instruction;
+            InstructionNumeral instructionIndex;
 
             while (true) {
-                currentInstructionNumeral = readNextInstruction(program, currentInstruction);
-                currentAddress += sizeof(Instruction);
+                instructionIndex = readNextInstruction(program, instruction);
+                currentAddress += sizeof(Byte);
 
-                if (currentInstructionNumeral > InstructionNumeral(LastInstruction)) {
+                if (instructionIndex > LastInstructionIndex) {
                     break;
                 }
 
-                instructionInterpreters[currentInstructionNumeral](program, *this);
+                instructionInterpreters[instructionIndex](program, *this);
             }
 
             std::cout << "[Interpreter::interpret] Done" << std::endl;

@@ -44,8 +44,9 @@ namespace PAX {
             PRT
         };
 
-        constexpr auto LastInstruction = Instruction::PRT;
         using InstructionNumeral = unsigned;
+        constexpr auto LastInstruction = Instruction::PRT;
+        constexpr auto LastInstructionIndex = InstructionNumeral(LastInstruction);
     }
 }
 

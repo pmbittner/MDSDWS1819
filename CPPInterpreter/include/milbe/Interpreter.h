@@ -75,8 +75,7 @@ namespace PAX {
 
             template<>
             static void initFunctionTable<LastInstruction>() {
-                constexpr auto index = InstructionNumeral(LastInstruction);
-                instructionInterpreters[index] = &interpretInstruction<LastInstruction>;
+                instructionInterpreters[LastInstructionIndex] = &interpretInstruction<LastInstruction>;
             }
 
             static void initialize();
