@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <chrono>
 
 #include <milbe/Interpreter.h>
 
@@ -24,7 +25,16 @@ int main(int args, char** argv) {
 
     PAX::Milbe::Interpreter::initialize();
     PAX::Milbe::Interpreter interpreter;
-    interpreter.interpret(program);
+
+    {
+        using namespace std::chrono;
+
+        high_resolution_clock::time_point StartTime =  high_resolution_clock::now();
+        interpreter.interpret(program);
+        double executionTime = duration<double>(high_resolution_clock::now() - StartTime).count();
+
+        std::cout << "[Done] " << executionTime << "s" << std::endl;
+    }
 
     return 0;
 }

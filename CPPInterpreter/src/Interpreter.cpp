@@ -41,8 +41,6 @@ namespace PAX {
 
                 instructionInterpreters[instructionIndex](program, *this);
             }
-
-            std::cout << "[Interpreter::interpret] Done" << std::endl;
         }
 
 #define PAX_MILBE_READ(name) { \
