@@ -1,0 +1,91 @@
+ProgramImpl_AdventureTime:
+lod 0
+sto Finn
+lod 0
+sto Jake
+lod 0
+sto abenteuerNummer
+lod 1
+sto Finn
+lod 0
+sto Jake
+lod 1
+sto abenteuerNummer
+For_Begin_0:
+lod abenteuerNummer
+lod 3
+leq
+neg
+jpc For_End_0
+lod Jake
+lod Finn
+cal FunctionImpl_Adventure
+sto Jake
+prt"Jake = "
+lod Jake
+yld
+lod abenteuerNummer
+lod 1
+add
+sto abenteuerNummer
+jmp For_Begin_0
+For_End_0:
+lod 3
+sto abenteuerNummer
+jmp EndProgram
+FunctionImpl_Adventure:
+sto Finn
+sto Jake
+lod 0
+sto spassFaktor
+lod Finn
+lod 0
+eq
+neg
+jpc Else_1
+lod Jake
+lod 0
+eq
+neg
+jpc EndIf_2
+lod 0
+ret
+jmp EndIf_2
+EndIf_2:
+lod Jake
+lod 2
+add
+sto Finn
+lod Jake
+lod 1
+sub
+sto Jake
+jmp EndIf_1
+Else_1:
+lod Jake
+lod 0
+eq
+neg
+jpc EndIf_3
+lod Finn
+lod 2
+add
+sto Jake
+lod Finn
+lod 1
+sub
+sto Finn
+jmp EndIf_3
+EndIf_3:
+EndIf_1:
+lod 2
+lod Finn
+lod Jake
+add
+mul
+sto spassFaktor
+lod spassFaktor
+ret
+sto Finn
+sto Jake
+EndProgram:

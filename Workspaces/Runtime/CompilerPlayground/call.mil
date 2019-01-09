@@ -1,0 +1,15 @@
+lod 3
+lod 6
+cal Div
+yld
+jmp EndProgram
+
+Div:
+sto x
+sto y
+lod x
+lod y
+div
+ret
+
+EndProgram:
