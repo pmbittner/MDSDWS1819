@@ -25,7 +25,7 @@ public class ForLoopCompiler extends ElementCompiler<ForLoop> {
 		
 		// Condition
 		compilation.addLoadInstruction(index);
-		compilation.addLoadInstruction(element.getUpperBound());
+		compiler.compile(element.getUpperBound(), compilation);
 		if (element.isIncrement()) {
 			compilation.add(factory.createLowerEqualsComparison());
 		} else {
@@ -51,8 +51,8 @@ public class ForLoopCompiler extends ElementCompiler<ForLoop> {
 		compilation.add(forEnd);
 		
 		// TODO: Find a prettier solution for this
-		compilation.addLoadInstruction(element.getUpperBound());
-		compilation.addStoreInstruction(index);
+		//compilation.addLoadInstruction(element.getUpperBound());
+		//compilation.addStoreInstruction(index);
 	}
 
 }

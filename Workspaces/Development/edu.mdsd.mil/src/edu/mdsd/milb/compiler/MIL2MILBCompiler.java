@@ -31,7 +31,7 @@ public class MIL2MILBCompiler {
 			compile(statement, milb);
 		}
 		
-		{
+		{ // Debug
 			byte[] bytes = milb.getBytesPrimitive();
 	
 			out().println();

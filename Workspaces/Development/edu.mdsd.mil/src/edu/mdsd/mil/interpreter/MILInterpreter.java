@@ -72,6 +72,8 @@ public class MILInterpreter {
 	public void initialize() {
 		operandStack.initialize();
 		callStack.initialize();
+		instructions.clear();
+		jumpMarkers.clear();
 		
 		// We define 0 as the return address of the whole program.
 		callStack.push(0);

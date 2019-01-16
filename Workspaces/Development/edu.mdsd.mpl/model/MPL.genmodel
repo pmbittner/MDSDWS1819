@@ -64,10 +64,10 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//WhileLoop/condition"/>
     </genClasses>
     <genClasses ecoreClass="MPL.ecore#//ForLoop">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MPL.ecore#//ForLoop/upperBound"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//ForLoop/block"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//ForLoop/index"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MPL.ecore#//ForLoop/increment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference MPL.ecore#//ForLoop/upperBound"/>
     </genClasses>
     <genClasses ecoreClass="MPL.ecore#//AssignmentStatement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MPL.ecore#//AssignmentStatement/assignment"/>

@@ -17,19 +17,24 @@ public class WellDeclaredForLoop extends AbstractModelConstraint {
 		Integer tryFrom = evaluate(loop.getIndex().getRightHandSide());
 		if (tryFrom != null) {
 			int from = tryFrom;
-			int to = loop.getUpperBound();
 			
-			//String s = loop.getStep();
+			Integer tryTo = evaluate(loop.getUpperBound());
 			
-			if (
-					//s.contains("Down")
-					!loop.isIncrement()
-					) {
-				 if (from < to) {
-					 return context.createFailureStatus("greater", "Down To");
-				 }
-			} else if (from > to) {
-				return context.createFailureStatus("smaller", "To");
+			if (tryTo != null) {
+				int to = tryTo;
+				
+				//String s = loop.getStep();
+				
+				if (
+						//s.contains("Down")
+						!loop.isIncrement()
+						) {
+					 if (from < to) {
+						 return context.createFailureStatus("greater", "Down To");
+					 }
+				} else if (from > to) {
+					return context.createFailureStatus("smaller", "To");
+				}
 			}
 		}
 		
