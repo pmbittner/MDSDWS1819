@@ -1,0 +1,97 @@
+ProgramImpl_PrintPrimes:
+lod 0
+sto false
+lod 1000
+sto n
+lod 0
+sto p
+lod 0
+sto p
+For_Begin_0:
+lod p
+lod n
+leq
+neg
+jpc For_End_0
+lod p
+cal FunctionImpl_isPrime
+lod false
+neq
+neg
+jpc EndIf_1
+prt"p = "
+lod p
+yld
+jmp EndIf_1
+EndIf_1:
+lod p
+lod 1
+add
+sto p
+jmp For_Begin_0
+For_End_0:
+jmp EndProgram
+FunctionImpl_mod:
+sto x
+sto m
+While_Begin_2:
+lod x
+lod m
+geq
+neg
+jpc While_End_2
+lod x
+lod m
+sub
+sto x
+jmp While_Begin_2
+While_End_2:
+lod x
+ret
+FunctionImpl_isPrime:
+sto n
+lod 0
+sto i
+lod 1
+sto true
+lod 0
+sto false
+lod n
+lod 1
+leq
+neg
+jpc EndIf_3
+lod false
+ret
+jmp EndIf_3
+EndIf_3:
+lod 2
+sto i
+For_Begin_4:
+lod i
+lod n
+lod 1
+sub
+leq
+neg
+jpc For_End_4
+lod i
+lod n
+cal FunctionImpl_mod
+lod 0
+eq
+neg
+jpc EndIf_5
+lod false
+ret
+jmp EndIf_5
+EndIf_5:
+lod i
+lod 1
+add
+sto i
+jmp For_Begin_4
+For_End_4:
+lod true
+ret
+EndProgram:

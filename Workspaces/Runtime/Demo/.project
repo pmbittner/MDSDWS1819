@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>Demo</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>edu.mdsd.mpl.resource.mpl.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>edu.mdsd.mil.resource.mil.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>edu.mdsd.mpl.resource.mpl.nature</nature>
+		<nature>edu.mdsd.mil.resource.mil.nature</nature>
+	</natures>
+</projectDescription>

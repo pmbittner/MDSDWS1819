@@ -1,0 +1,33 @@
+ProgramImpl_PrintSquares:
+lod 10
+sto n
+lod 0
+sto x
+lod 0
+sto squareOfX
+lod 1
+sto x
+For_Begin_0:
+lod x
+lod n
+leq
+neg
+jpc For_End_0
+lod x
+lod x
+mul
+sto squareOfX
+prt"x = "
+lod x
+yld
+prt"squareOfX = "
+lod squareOfX
+yld
+lod x
+lod 1
+add
+sto x
+jmp For_Begin_0
+For_End_0:
+jmp EndProgram
+EndProgram:

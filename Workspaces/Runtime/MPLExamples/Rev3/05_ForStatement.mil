@@ -1,0 +1,119 @@
+ProgramImpl_Example:
+lod 4
+sto a
+lod 0
+sto b
+lod 1
+sto c
+lod 1
+sto b
+For_Begin_0:
+lod b
+lod 10
+leq
+neg
+jpc For_End_0
+lod c
+lod b
+lod 5
+mul
+add
+sto c
+lod b
+lod 1
+add
+sto b
+jmp For_Begin_0
+For_End_0:
+lod 10
+sto b
+For_Begin_1:
+lod b
+lod 1
+geq
+neg
+jpc For_End_1
+lod c
+lod b
+lod 5
+mul
+add
+sto c
+lod b
+lod 1
+sub
+sto b
+jmp For_Begin_1
+For_End_1:
+lod a
+sto b
+For_Begin_2:
+lod b
+lod 10
+leq
+neg
+jpc For_End_2
+lod c
+lod b
+lod 5
+mul
+add
+sto c
+lod b
+lod 1
+add
+sto b
+jmp For_Begin_2
+For_End_2:
+lod 4
+sto b
+For_Begin_3:
+lod b
+lod a
+lod 10
+mul
+lod 3
+sub
+leq
+neg
+jpc For_End_3
+lod c
+lod b
+lod 5
+mul
+add
+sto c
+lod b
+lod 1
+add
+sto b
+jmp For_Begin_3
+For_End_3:
+lod a
+lod 5
+mul
+lod 2
+sub
+sto b
+For_Begin_4:
+lod b
+lod c
+lod 2
+mul
+geq
+neg
+jpc For_End_4
+lod c
+lod b
+lod 5
+mul
+add
+sto c
+lod b
+lod 1
+sub
+sto b
+jmp For_Begin_4
+For_End_4:
+jmp EndProgram
+EndProgram:

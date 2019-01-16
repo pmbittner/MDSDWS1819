@@ -30,8 +30,6 @@ add
 sto abenteuerNummer
 jmp For_Begin_0
 For_End_0:
-lod 3
-sto abenteuerNummer
 jmp EndProgram
 FunctionImpl_Adventure:
 sto Finn
@@ -86,6 +84,4 @@ mul
 sto spassFaktor
 lod spassFaktor
 ret
-sto Finn
-sto Jake
 EndProgram:

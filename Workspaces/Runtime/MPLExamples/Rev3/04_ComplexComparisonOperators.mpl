@@ -16,6 +16,6 @@ Program Example
 	If ((a * 2) >= b) Then
 	End.
 	
-	If ((a + 5) - 3 > (5 * b) + -7) Then
+	If ((a + 5) - 3 > (5 * b) + - 7) Then
 	End.
 End.
