@@ -9,7 +9,7 @@
 #include <iostream>
 #include <array>
 
-#include "Program.h"
+#include "ProgramDefinition.h"
 #include "Instruction.h"
 #include "OperandStack.h"
 #include "CallStack.h"
@@ -79,8 +79,7 @@ namespace PAX {
          */
         class Interpreter {
         public:
-            // we need this because std::ifstream::tellg is not reliable
-            ProgramAddress currentAddress;
+            ProgramAddress currentAddress = 0;
             OperandStack operandStack;
             CallStack callStack;
 

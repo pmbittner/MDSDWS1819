@@ -7,8 +7,11 @@
 
 #include <cstdint>
 
+#define PAX_FORCEINLINE __forceinline
+
 namespace PAX {
     namespace Milbe {
+        using Byte = char;
         using Variable = uint32_t;
         using Value = uint32_t;
     }
