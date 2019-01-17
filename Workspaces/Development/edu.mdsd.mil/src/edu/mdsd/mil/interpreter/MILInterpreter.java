@@ -37,8 +37,8 @@ public class MILInterpreter {
 		
 		operandStack = new OperandStack();
 		callStack = new CallStack(output);
-		instructions = null;
-		jumpMarkers = null;
+		instructions = new ArrayList<>();
+		jumpMarkers = new HashMap<>();
 		
 		instructionInterpreters = new HashMap<Class, InstructionInterpreter>() {
 			{
@@ -96,9 +96,6 @@ public class MILInterpreter {
 	
 	private void parseStatements(List<Statement> statements) {
 		int instructionPosition = 0;
-		
-		instructions = new ArrayList<>();
-		jumpMarkers = new HashMap<>();
 		
 		for (Statement statement : statements) {
 			if (statement instanceof Instruction) {
