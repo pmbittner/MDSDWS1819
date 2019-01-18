@@ -87,11 +87,6 @@ public class MplLaunchConfigurationDelegate extends LaunchConfigurationDelegate 
 			interpreter.setOutput(new MessageConsoleOutput(mplConsole, interpreter));
 			interpreter.initialize();
 			Map<String, Integer> output = interpreter.interpret(milmodel);
-			
-			interpreter.out().println("\nResults:");
-			for (Entry<String, Integer> kv : output.entrySet()) {
-				interpreter.out().println("  " + kv.getKey() + " = " + kv.getValue());
-			}
 		}
 	}
 	

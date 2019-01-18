@@ -1,35 +1,43 @@
 ProgramImpl_PrintPrimes:
-lod 0
-sto false
 lod 1000
 sto n
 lod 0
-sto p
+sto foundPrimes
 lod 0
-sto p
-For_Begin_0:
-lod p
+sto i
+lod 1
+sto true
+lod 0
+sto foundPrimes
+lod 2
+sto i
+While_Begin_0:
+lod foundPrimes
 lod n
-leq
+lt
 neg
-jpc For_End_0
-lod p
+jpc While_End_0
+lod i
 cal FunctionImpl_isPrime
-lod false
-neq
+lod true
+eq
 neg
 jpc EndIf_1
-prt"p = "
-lod p
+prt"i = "
+lod i
 yld
-jmp EndIf_1
-EndIf_1:
-lod p
+lod foundPrimes
 lod 1
 add
-sto p
-jmp For_Begin_0
-For_End_0:
+sto foundPrimes
+jmp EndIf_1
+EndIf_1:
+lod i
+lod 1
+add
+sto i
+jmp While_Begin_0
+While_End_0:
 jmp EndProgram
 FunctionImpl_mod:
 sto x

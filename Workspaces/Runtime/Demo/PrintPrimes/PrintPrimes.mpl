@@ -23,11 +23,17 @@ Function isPrime(n)
 End.
 
 Program PrintPrimes
-	Variables false := 0, n := 1000, p.
+	Variables n := 1000, foundPrimes, i, true := 1.
 	
-	For p := 0 To n Do
-		If (isPrime(p) <> false) Then
-			Trace(p).
+	foundPrimes := 0.
+	i := 2.
+	
+	While (foundPrimes < n) Do
+		If (isPrime(i) = true) Then
+			Trace(i).
+			foundPrimes := foundPrimes + 1.
 		End.
+		
+		i := i + 1.
 	End.
 End.

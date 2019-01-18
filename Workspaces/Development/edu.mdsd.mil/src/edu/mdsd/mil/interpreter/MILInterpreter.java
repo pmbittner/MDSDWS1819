@@ -82,6 +82,8 @@ public class MILInterpreter {
 	}
 	
 	public Map<String, Integer> interpret(MILModel model) {
+		long startTime = System.currentTimeMillis();
+		
 		parseStatements(model.getStatements());
 	
 		while (programPosition < instructions.size()) {
@@ -90,6 +92,10 @@ public class MILInterpreter {
 			
 			interpret(currentInstruction);
 		}
+		
+		long milliseconds = System.currentTimeMillis() - startTime;
+		
+		out().println("[MILInterpreter.interpret] Done in " + (milliseconds / 1000.0) + "s");
 		
 		return getVariableRegister().toMap();
 	}

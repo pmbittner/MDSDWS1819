@@ -66,12 +66,13 @@ public class MilLaunchConfigurationDelegate extends LaunchConfigurationDelegate 
 		MILModel milmodel = (MILModel) launchHelper.getModelRoot(configuration);
 		
 		//new edu.mdsd.mil.resource.mil.launch.MilLaunchConfigurationHelper().launch(configuration, mode, launch, monitor);
-		
-		MessageConsole milConsole = findConsole(MILConsoleName);
+
+		//MessageConsole milConsole = findConsole(MILConsoleName);
+		//milConsole.clearConsole();
 		MessageConsole milbConsole = findConsole(MILBConsoleName);
-		milConsole.clearConsole();
 		milbConsole.clearConsole();
 		
+		/*
 		interpreter.setOutput(new MessageConsoleOutput(milConsole, interpreter));
 		interpreter.initialize();
 		Map<String, Integer> output = interpreter.interpret(milmodel);
@@ -79,7 +80,7 @@ public class MilLaunchConfigurationDelegate extends LaunchConfigurationDelegate 
 		interpreter.out().println("\nResults:");
 		for (Entry<String, Integer> kv : output.entrySet()) {
 			interpreter.out().println("  " + kv.getKey() + " = " + kv.getValue());
-		}
+		}*/
 		
 		// Compile to milb
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
