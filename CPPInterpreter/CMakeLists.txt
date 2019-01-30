@@ -3,7 +3,7 @@ project(paxmilb)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /O2")
 message("Compiling with options ${CMAKE_CXX_FLAGS}")
 
 IF(PAX_MILBE_CACHE_PROGRAM)
