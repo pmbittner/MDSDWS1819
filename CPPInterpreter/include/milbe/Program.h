@@ -23,7 +23,7 @@ namespace PAX {
 
             std::ifstream::pos_type programLength = stream.tellg();
 
-            Program p = {programLength, new Byte[programLength]};
+            Program p = {programLength, new Byte[static_cast<unsigned int>(programLength)]};
             stream.seekg(0, std::ios::beg);
             stream.read(p.code, programLength);
 

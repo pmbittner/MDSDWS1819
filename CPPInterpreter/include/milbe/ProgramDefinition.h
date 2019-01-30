@@ -16,7 +16,7 @@ namespace PAX {
     namespace Milbe {
 #if PAX_MILBE_CACHE_PROGRAM
         struct Program {
-            long long length = 0;
+            int64_t length = 0;
             Byte* code = nullptr;
         };
 #else
