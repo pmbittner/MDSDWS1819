@@ -1,0 +1,9 @@
+LoopStart:
+lod 1
+lod i
+add
+sto i
+lod i
+lod 5
+leq
+jpc LoopStart
