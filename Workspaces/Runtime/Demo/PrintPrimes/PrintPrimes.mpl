@@ -23,7 +23,7 @@ Function isPrime(n)
 End.
 
 Program PrintPrimes
-	Variables n := 1000, foundPrimes, i, true := 1.
+	Variables n := 100, foundPrimes, i, true := 1.
 	
 	foundPrimes := 0.
 	i := 2.

@@ -1,5 +1,5 @@
 ProgramImpl_PrintPrimes:
-lod 1000
+lod 100
 sto n
 lod 0
 sto foundPrimes
